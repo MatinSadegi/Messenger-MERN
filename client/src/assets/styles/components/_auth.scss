@@ -1,0 +1,110 @@
+@use '../abstracts/abstracts' as *;
+.auth {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(-90deg, rgb(47, 47, 47) 0%, rgb(90, 90, 90) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  .auth__form-container {
+    width: 65%;
+    height: 85%;
+    background: url(../images/pnghut_communication-icon-chat-white.png);
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: right;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    .auth__form-container_fields {
+      color: $grey;
+      width: 60%;
+      margin-left: 3rem;
+      > p:first-child {
+        font-size: 0.9rem;
+      }
+      h2 {
+        color: white;
+        font-size: 1.7rem;
+        letter-spacing: 0.1rem;
+        margin: 8px 0;
+      }
+      > p:nth-child(3) {
+        font-size: 0.8rem;
+        span {
+          margin-left: 2px;
+          color: $sky-blue;
+          cursor: pointer;
+        }
+      }
+      form {
+        margin-top: 15px;
+        width: 60%;
+        input {
+          display: block;
+          border: none;
+          margin-top: 15px;
+          width: 100%;
+          padding: 10px;
+          border-radius: 0.6rem;
+          color: white;
+          background-color: rgb(52, 52, 52);
+          outline: none;
+          &::placeholder {
+            color: $grey;
+            font-size: 0.7rem;
+          }
+        }
+        > div {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          input {
+            width: 45%;
+          }
+        }
+        button {
+          padding: 9px 0;
+          margin: auto;
+          margin-top: 20px;
+          display: block;
+          border: none;
+          width: 50%;
+          border-radius: 1rem;
+          background-color: $sky-blue;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $breackpoint-tablet) {
+  .auth {
+    .auth__form-container {
+      width: 95%;
+      .auth__form-container_fields {
+          width: 70%;
+      }
+    }
+  }
+}
+@media screen and (max-width: $breackpoint-mobile) {
+  .auth {
+    .auth__form-container {
+      width: 100%;
+      height: 95%;
+      background-position: top;
+      justify-content: center;
+      .auth__form-container_fields {
+          width: 80%;
+          margin:0;
+          margin-top: 6rem;
+          form{
+            width: 100%;
+          }
+      }
+    }
+  }
+}
