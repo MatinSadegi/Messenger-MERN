@@ -1,0 +1,26 @@
+@use '../../abstracts/abstracts' as *;
+.side-bar__container {
+  background-color: $Gainsboro;
+  padding: 10px 0 0 10px;
+  .logo__div {
+    display: flex;
+    align-items: center;
+    p {
+      font-family: $relway;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  }
+  ul {
+    margin: 40px 0 0 10px;
+    li{
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        span{
+            margin-left: 10px;
+        }
+    }
+  }
+}
