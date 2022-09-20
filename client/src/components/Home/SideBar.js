@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react';
+import message from '../../assets/icons/message-regular.svg';
+import channel from '../../assets/icons/people-group-solid.svg';
+import group from '../../assets/icons/user-group-solid.svg';
 
 const SideBar = () => {
+  const [hover, setHover] = useState(false);
   return (
     <div className='side-bar__container'>
       <div className='logo__div'>
@@ -12,26 +16,20 @@ const SideBar = () => {
       </div>
       <ul>
         <li>
-          <img
-            src='https://img.icons8.com/external-anggara-basic-outline-anggara-putra/20/000000/external-inbox-home-screen-anggara-basic-outline-anggara-putra.png'
-            alt='message'
-          />
+          <img src={message} alt='message' />
           <span>Messages</span>
         </li>
         <li>
-          <img
-            src='https://img.icons8.com/ios/19/000000/decentralized-network.png'
-            alt='channels'
-          />
+          <img src={channel} alt='channel' />
           <span>Channels</span>
         </li>
         <li>
-          <img src='https://img.icons8.com/windows/21/000000/group-foreground-selected.png' alt='group' />
+          <img src={group} alt='group'/>
           <span>Group</span>
         </li>
       </ul>
     </div>
   );
-}
+};
 
-export default SideBar
+export default SideBar;

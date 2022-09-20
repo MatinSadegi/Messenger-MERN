@@ -1,0 +1,56 @@
+@use '../../abstracts/abstracts' as *;
+.chat-screen__container {
+  .chat-screen__header {
+    border-bottom: 1px solid $Gainsboro;
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .chat-screen__left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      .card__profile {
+        position: relative;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: rgb(235, 173, 72);
+        &::after {
+          content: '';
+          width: 0.5rem;
+          height: 0.5rem;
+          border: 1px solid $Gainsboro;
+          border-radius: 50%;
+          background-color: rgb(9, 187, 9);
+          position: absolute;
+          right: 0.2rem;
+          bottom: 0;
+        }
+      }
+      .card__info {
+        margin-left: 0.7rem;
+        p {
+          font-weight: 300;
+          font-size: 0.6rem;
+          &:first-child {
+            font-size: 0.8rem;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+    .chat-screen__right{
+        img{
+            border: 1px solid $grey;
+            padding: 0.4rem;
+            border-radius: 0.7rem;
+            margin-right: 0.6rem;
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+    }
+  }
+}

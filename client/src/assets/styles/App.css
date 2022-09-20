@@ -20,7 +20,7 @@
   align-items: center;
 }
 .auth .auth__form-container .auth__form-container_fields {
-  color: #d3d3d3;
+  color: #e8e6e6;
   width: 60%;
   margin-left: 3rem;
 }
@@ -57,7 +57,7 @@
   outline: none;
 }
 .auth .auth__form-container .auth__form-container_fields form input::placeholder {
-  color: #d3d3d3;
+  color: #e8e6e6;
   font-size: 0.7rem;
 }
 .auth .auth__form-container .auth__form-container_fields form > div {
@@ -118,20 +118,48 @@
   font-weight: 600;
 }
 .side-bar__container ul {
-  margin: 40px 0 0 10px;
+  margin: 2.5rem 0 0 10px;
 }
 .side-bar__container ul li {
   font-size: 0.8rem;
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+  border-right: 3px solid transparent;
+  border-radius: 0.2rem;
+  transition: all 200ms ease-in;
+  cursor: pointer;
+}
+.side-bar__container ul li img {
+  width: 18px;
+  filter: brightness(100);
+}
+.side-bar__container ul li:hover {
+  border-right: 3px solid orange;
+  background-color: white;
+  color: #1E90FF;
 }
 .side-bar__container ul li span {
   margin-left: 10px;
 }
 
 .status-bar__container {
-  background-color: rgb(128, 255, 0);
+  border-left: 1px solid #f5f8fb;
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.status-bar__container img {
+  border: 1px solid #e8e6e6;
+  padding: 0.4rem;
+  border-radius: 0.7rem;
+}
+.status-bar__container .status-bar__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .inbox__container {
@@ -148,7 +176,7 @@
   font-size: 1.5rem;
 }
 .inbox__container .section-name img {
-  border: 1px solid #f5f8fb;
+  border: 1px solid #e8e6e6;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
@@ -162,7 +190,7 @@
   width: 100%;
   background-color: #f5f8fb;
   outline: none;
-  border: 1px solid #d3d3d3;
+  border: 1px solid #e8e6e6;
   padding: 0.3rem;
   border-radius: 0.4rem;
 }
@@ -177,13 +205,65 @@
   margin-top: 2rem;
 }
 
+.chat-screen__container .chat-screen__header {
+  border-bottom: 1px solid #f5f8fb;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat-screen__container .chat-screen__header .chat-screen__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chat-screen__container .chat-screen__header .chat-screen__left .card__profile {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgb(235, 173, 72);
+}
+.chat-screen__container .chat-screen__header .chat-screen__left .card__profile::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1px solid #f5f8fb;
+  border-radius: 50%;
+  background-color: rgb(9, 187, 9);
+  position: absolute;
+  right: 0.2rem;
+  bottom: 0;
+}
+.chat-screen__container .chat-screen__header .chat-screen__left .card__info {
+  margin-left: 0.7rem;
+}
+.chat-screen__container .chat-screen__header .chat-screen__left .card__info p {
+  font-weight: 300;
+  font-size: 0.6rem;
+}
+.chat-screen__container .chat-screen__header .chat-screen__left .card__info p:first-child {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.chat-screen__container .chat-screen__header .chat-screen__right img {
+  border: 1px solid #e8e6e6;
+  padding: 0.4rem;
+  border-radius: 0.7rem;
+  margin-right: 0.6rem;
+}
+.chat-screen__container .chat-screen__header .chat-screen__right img:last-child {
+  margin-right: 0;
+}
+
 .card {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.6rem;
   padding: 0.6rem 0;
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: 1px solid #e8e6e6;
 }
 .card:last-child {
   border: none;
@@ -201,10 +281,13 @@
   height: 0.5rem;
   border: 1px solid #f5f8fb;
   border-radius: 50%;
-  background-color: rgb(9, 187, 9);
+  background-color: #32CD32;
   position: absolute;
   right: 0.2rem;
   bottom: 0;
+}
+.card .card__info {
+  margin-right: 3rem;
 }
 .card .card__info p {
   font-weight: 300;
@@ -227,13 +310,13 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: rgb(39, 97, 255);
+  background-color: #1E90FF;
   margin-top: 0.1rem;
 }
 
 .home {
   display: grid;
-  grid-template-columns: 2fr 4fr 12fr 1fr;
+  grid-template-columns: 3fr 5fr 12fr 1fr;
   height: 100vh;
 }
 

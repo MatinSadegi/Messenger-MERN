@@ -1,11 +1,11 @@
 @use './sidebar';
 @use './statusbar';
 @use './inbox';
-@use './card';
 @use './chatscreen';
+@use './card';
 @use '../../abstracts/abstracts' as *;
 .home{
     display: grid;
-    grid-template-columns: 2fr 4fr 12fr 1fr;
+    grid-template-columns: 3fr 5fr 12fr 1fr;
     height: 100vh;
 }
