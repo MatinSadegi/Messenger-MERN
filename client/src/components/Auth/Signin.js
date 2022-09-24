@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
+import { useSignInMutation } from '../../api/apiSlice';
 
 const initialState = {
-  userName: '',
+  email: '',
   password: '',
 };
 
 const Signin = () => {
   const [form, setForm] = useState(initialState);
+  const [signIn] = useSignInMutation();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+   const handleSubmit = (e) => {
+    e.preventDefault()
+     signIn(form);
+   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit} noValidate>
       <input
-        name='username'
-        type='text'
-        placeholder='Username'
+        name='email'
+        type='email'
+        placeholder='Email'
         onChange={handleChange}
         required
       />

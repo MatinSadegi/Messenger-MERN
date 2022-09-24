@@ -1,49 +1,63 @@
 import React, { useState } from 'react';
+import { useSignUpMutation } from '../../api/apiSlice';
 
 const initialState = {
-  fullName: '',
-  userName: '',
+  firstName: '',
+  lastName: '',
+  email: '',
   password: '',
   confirmPassword: '',
 };
-const Signup = () => {
-    const [form, setForm] = useState(initialState);
 
-    const handleChange = (e) => {
-      setForm({ ...form, [e.target.name]: e.target.value });
-    };
+const Signup = () => {
+  const [form, setForm] = useState(initialState);
+  const [signUp] = useSignUpMutation();
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signUp(form);
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit} noValidate>
       <div>
         <input
-          name='fullName'
+          name='firstName'
           type='text'
-          placeholder='Full Name'
+          placeholder='First Name'
           onChange={handleChange}
           required
         />
         <input
-          name='userName'
+          name='lastName'
           type='text'
-          placeholder='Username'
+          placeholder='Last Name'
           onChange={handleChange}
           required
         />
       </div>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          onChange={handleChange}
-          required
-        />
-        <input
-          name='confirmPassword'
-          type='password'
-          placeholder='Confirm Password'
-          onChange={handleChange}
-          required
-        />
+      <input
+        name='email'
+        type='email'
+        placeholder='Email'
+        onChange={handleChange}
+        required
+      />
+      <input
+        name='password'
+        type='password'
+        placeholder='Password'
+        onChange={handleChange}
+        required
+      />
+      <input
+        name='confirmPassword'
+        type='password'
+        placeholder='Confirm Password'
+        onChange={handleChange}
+        required
+      />
 
       <button
         type='submit'

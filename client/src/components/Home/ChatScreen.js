@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const ChatScreen = () => {
   return (
@@ -28,6 +28,6 @@ const ChatScreen = () => {
       </div>
     </div>
   );
-}
+};
 
-export default ChatScreen
+export default ChatScreen;
