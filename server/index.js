@@ -7,6 +7,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 //Routes
 import userRoutes from './routes/users.js'
+import chatRoutes from './routes/chat.js'
 
 const app = express();
 const server = createServer(app);
@@ -20,7 +21,9 @@ connectDB()
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
+//Routes
 app.use('/user', userRoutes);
+app.use('/chat', chatRoutes);
 app.use('/', (req, res) => {
     res.send("hello")
 })
