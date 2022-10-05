@@ -1,43 +1,125 @@
 @use '../../abstracts/abstracts' as *;
-.inbox__container{
-    border-right: 1px solid $Gainsboro;
-    padding: 1rem 2rem;
-    .section-name{
+.inbox__container {
+  border-right: 1px solid $slate-100;
+  padding: 1rem 2rem;
+  .section-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h3 {
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
+    img {
+      border: 1px solid $grey;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+  }
+  .search__container {
+    .search_div {
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      height: 2.5rem;
+      input {
+        width: 100%;
+        height: 100%;
+        padding: 0 1rem;
+        background-color: $slate-100;
+        outline: none;
+        border: 1px solid $grey;
+        border-radius: 0.4rem 0 0 0.4rem;
+      }
+      > div {
+        border: 1px solid $grey;
+        border-left: none;
         display: flex;
-        align-items: center; 
-        justify-content: space-between;
-        h3{
-            font-weight: 500;
-            font-size: 1.5rem;
-        }
-        img {
-            border: 1px solid $grey;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
-        }
-    }
-    .search_div{
-        margin-top: 1.5rem;
-        display: flex; 
+        justify-content: center;
         align-items: center;
-        position: relative;
-        input{
-            width: 100%;
-            background-color: $Gainsboro;
-            outline: none;
-            border: 1px solid $grey; 
-            padding: 0.3rem;
-            border-radius: 0.4rem;
-        }
-        img{
-            position: absolute;
-            right: 0.5rem;
-        }
+        border-radius: 0 0.4rem 0.4rem 0;
+        width: 15%;
+        height: 100%;
+      }
+      img {
+        right: 0.5rem;
+      }
     }
-    .unreaded__container{
-        background-color: $Gainsboro;
-        padding: 0.2rem 0.7rem;
+    .search-result__container {
+      cursor: pointer;
+      > p {
+        text-align: center;
+        color: red;
+      }
+      .user__container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        padding: 0.6rem 0 0.6rem 0.6rem;
         border-radius: 0.5rem;
-        margin-top: 2rem;
+        background-color: $slate-100;
+        transition: background-color 150ms ease-in;
+        &:hover {
+          background-color: $slate-200;
+        }
+        .user__profile {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          background-color: rgb(72, 235, 208);
+        }
+        .user__info {
+          margin-left: 1rem;
+          .user__name {
+            font-weight: 500;
+          }
+          .user__email {
+            font-size: 0.8rem;
+          }
+        }
+      }
     }
+  }
+
+  .search_div {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 2.5rem;
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 0 1rem;
+      background-color: $slate-100;
+      outline: none;
+      border: 1px solid $grey;
+
+      border-radius: 0.4rem 0 0 0.4rem;
+    }
+    > div {
+      border: 1px solid $grey;
+      border-left: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0 0.4rem 0.4rem 0;
+      width: 15%;
+      height: 100%;
+    }
+    img {
+      right: 0.5rem;
+    }
+  }
+  .unreaded__container {
+    background-color: $slate-100;
+    padding: 0.2rem 0.7rem;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+  }
 }

@@ -1,16 +1,16 @@
 @use '../../abstracts/abstracts' as *;
 .chat-screen__container {
   .chat-screen__header {
-    border-bottom: 1px solid $Gainsboro;
+    border-bottom: 1px solid $slate-100;
     width: 100%;
     padding: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     .chat-screen__left {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       .card__profile {
         position: relative;
         width: 2.5rem;
@@ -21,7 +21,7 @@
           content: '';
           width: 0.5rem;
           height: 0.5rem;
-          border: 1px solid $Gainsboro;
+          border: 1px solid $slate-100;
           border-radius: 50%;
           background-color: rgb(9, 187, 9);
           position: absolute;
@@ -41,16 +41,16 @@
         }
       }
     }
-    .chat-screen__right{
-        img{
-            border: 1px solid $grey;
-            padding: 0.4rem;
-            border-radius: 0.7rem;
-            margin-right: 0.6rem;
-            &:last-child{
-                margin-right: 0;
-            }
+    .chat-screen__right {
+      img {
+        border: 1px solid $grey;
+        padding: 0.4rem;
+        border-radius: 0.7rem;
+        margin-right: 0.6rem;
+        &:last-child {
+          margin-right: 0;
         }
+      }
     }
   }
 }

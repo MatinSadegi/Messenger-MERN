@@ -1,6 +1,6 @@
 @use '../../abstracts/abstracts' as *;
 .side-bar__container {
-  background-color: $Gainsboro;
+  background-color: $slate-100;
   padding: 10px 0 0 10px;
   .logo__div {
     display: flex;
@@ -22,7 +22,7 @@
       border-radius: 0.2rem;
       transition: all 200ms ease-in;
       cursor: pointer;
-      img{
+      img {
         width: 18px;
         filter: brightness(100);
       }

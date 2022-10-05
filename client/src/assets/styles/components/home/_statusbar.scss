@@ -1,6 +1,6 @@
 @use '../../abstracts/abstracts' as *;
 .status-bar__container {
-  border-left: 1px solid $Gainsboro;
+  border-left: 1px solid $slate-100;
   padding: 1.5rem 0;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
     padding: 0.4rem;
     border-radius: 0.7rem;
   }
-  .status-bar__bottom{
+  .status-bar__bottom {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
