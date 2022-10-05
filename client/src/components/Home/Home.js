@@ -1,15 +1,12 @@
-import React,{useEffect} from 'react';
-import {io} from 'socket.io-client'
+import React,{useState} from 'react';
 import {Inbox, StatusBar, SideBar, ChatScreen} from '../';
 
 const Home = () => {
-  useEffect (() => {
-    io('http://localhost:5000')
-  },[])
+ const [inbox, setInbox] = useState({message:true , group:false})
   return (
     <div className='home'>
-      <SideBar/>
-      <Inbox/>
+      <SideBar setInbox={setInbox}/>
+      <Inbox inbox={inbox}/>
       <ChatScreen/>
       <StatusBar/>
     </div>

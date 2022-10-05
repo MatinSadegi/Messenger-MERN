@@ -105,7 +105,7 @@
   }
 }
 .side-bar__container {
-  background-color: #f5f8fb;
+  background-color: #f1f5f9;
   padding: 10px 0 0 10px;
 }
 .side-bar__container .logo__div {
@@ -137,14 +137,14 @@
 .side-bar__container ul li:hover {
   border-right: 3px solid orange;
   background-color: white;
-  color: #1E90FF;
+  color: #1e90ff;
 }
 .side-bar__container ul li span {
   margin-left: 10px;
 }
 
 .status-bar__container {
-  border-left: 1px solid #f5f8fb;
+  border-left: 1px solid #f1f5f9;
   padding: 1.5rem 0;
   display: flex;
   flex-direction: column;
@@ -163,7 +163,7 @@
 }
 
 .inbox__container {
-  border-right: 1px solid #f5f8fb;
+  border-right: 1px solid #f1f5f9;
   padding: 1rem 2rem;
 }
 .inbox__container .section-name {
@@ -180,33 +180,111 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
+.inbox__container .search__container .search_div {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 2.5rem;
+}
+.inbox__container .search__container .search_div input {
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+  background-color: #f1f5f9;
+  outline: none;
+  border: 1px solid #e8e6e6;
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+.inbox__container .search__container .search_div > div {
+  border: 1px solid #e8e6e6;
+  border-left: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0.4rem 0.4rem 0;
+  width: 15%;
+  height: 100%;
+}
+.inbox__container .search__container .search_div img {
+  right: 0.5rem;
+}
+.inbox__container .search__container .search-result__container {
+  cursor: pointer;
+}
+.inbox__container .search__container .search-result__container > p {
+  text-align: center;
+  color: red;
+}
+.inbox__container .search__container .search-result__container .user__container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding: 0.6rem 0 0.6rem 0.6rem;
+  border-radius: 0.5rem;
+  background-color: #f1f5f9;
+  transition: background-color 150ms ease-in;
+}
+.inbox__container .search__container .search-result__container .user__container:hover {
+  background-color: #e2e8f0;
+}
+.inbox__container .search__container .search-result__container .user__container .user__profile {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgb(72, 235, 208);
+}
+.inbox__container .search__container .search-result__container .user__container .user__info {
+  margin-left: 1rem;
+}
+.inbox__container .search__container .search-result__container .user__container .user__info .user__name {
+  font-weight: 500;
+}
+.inbox__container .search__container .search-result__container .user__container .user__info .user__email {
+  font-size: 0.8rem;
+}
 .inbox__container .search_div {
   margin-top: 1.5rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
+  width: 100%;
+  height: 2.5rem;
 }
 .inbox__container .search_div input {
   width: 100%;
-  background-color: #f5f8fb;
+  height: 100%;
+  padding: 0 1rem;
+  background-color: #f1f5f9;
   outline: none;
   border: 1px solid #e8e6e6;
-  padding: 0.3rem;
-  border-radius: 0.4rem;
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+.inbox__container .search_div > div {
+  border: 1px solid #e8e6e6;
+  border-left: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0.4rem 0.4rem 0;
+  width: 15%;
+  height: 100%;
 }
 .inbox__container .search_div img {
-  position: absolute;
   right: 0.5rem;
 }
 .inbox__container .unreaded__container {
-  background-color: #f5f8fb;
+  background-color: #f1f5f9;
   padding: 0.2rem 0.7rem;
   border-radius: 0.5rem;
   margin-top: 2rem;
 }
 
 .chat-screen__container .chat-screen__header {
-  border-bottom: 1px solid #f5f8fb;
+  border-bottom: 1px solid #f1f5f9;
   width: 100%;
   padding: 1.5rem;
   display: flex;
@@ -229,7 +307,7 @@
   content: "";
   width: 0.5rem;
   height: 0.5rem;
-  border: 1px solid #f5f8fb;
+  border: 1px solid #f1f5f9;
   border-radius: 50%;
   background-color: rgb(9, 187, 9);
   position: absolute;
@@ -279,9 +357,9 @@
   content: "";
   width: 0.5rem;
   height: 0.5rem;
-  border: 1px solid #f5f8fb;
+  border: 1px solid #f1f5f9;
   border-radius: 50%;
-  background-color: #32CD32;
+  background-color: #32cd32;
   position: absolute;
   right: 0.2rem;
   bottom: 0;
@@ -310,7 +388,7 @@
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: #1E90FF;
+  background-color: #1e90ff;
   margin-top: 0.1rem;
 }
 

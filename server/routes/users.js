@@ -57,7 +57,6 @@ router.post(
     .withMessage('must be at least 5 chars long')
     .custom(async(value, { req }) => {
       const existingUser = await User.findOne({email:req.body.email});
-      console.log(existingUser);
       const isPasswordCorrect = await bcrypt.compare(
         value,
         existingUser.password
@@ -71,3 +70,4 @@ router.post(
 router.get('/', protect, getUsers)
 
 export default router;
+ 

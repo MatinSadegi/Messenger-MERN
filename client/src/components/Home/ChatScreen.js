@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import io from 'socket.io-client';
 
 const ChatScreen = () => {
+  useEffect(() => {
+    io('http://localhost:5000');
+  },[]);
   return (
     <div className='chat-screen__container'>
       <div className='chat-screen__header'>

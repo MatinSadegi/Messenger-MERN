@@ -31,7 +31,7 @@ export const signIn = async (req, res) => {
   const existingUser = await User.findOne({ email });
   const error = validationResult(req);
   if (!error.isEmpty()) {
-    return res.status(422).json({ errors: error.array()[0] });
+    return res.status(422).json({ errors: error.array()[0].msg });
   }
   res
     .status(200)
@@ -49,6 +49,8 @@ export const getUsers = async (req, res) => {
         ],
       }
     : {};
+   
   const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
   res.json(users);
-};
+};  
+ 

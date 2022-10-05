@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import message from '../../assets/icons/message-regular.svg';
 import channel from '../../assets/icons/people-group-solid.svg';
 import group from '../../assets/icons/user-group-solid.svg';
 
-const SideBar = () => {
-  const [hover, setHover] = useState(false);
+const SideBar = ({setInbox}) => {
+ 
   return (
     <div className='side-bar__container'>
       <div className='logo__div'>
@@ -15,7 +15,7 @@ const SideBar = () => {
         <p>Wave</p>
       </div>
       <ul>
-        <li>
+        <li onClick={() => setInbox({ message: true, group: false })}>
           <img src={message} alt='message' />
           <span>Messages</span>
         </li>
@@ -23,8 +23,8 @@ const SideBar = () => {
           <img src={channel} alt='channel' />
           <span>Channels</span>
         </li>
-        <li>
-          <img src={group} alt='group'/>
+        <li onClick={() => setInbox({ message: false, group: true })}>
+          <img src={group} alt='group' />
           <span>Group</span>
         </li>
       </ul>

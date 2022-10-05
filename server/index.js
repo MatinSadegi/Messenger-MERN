@@ -6,12 +6,14 @@ import connectDB from './config/db.js';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 //Routes
-import userRoutes from './routes/users.js'
-import chatRoutes from './routes/chat.js'
+import userRoutes from './routes/users.js';
+import chatRoutes from './routes/chat.js';
+import messageRoutes from './routes/message.js';
 
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
+  pingTimeout:60000,
   cors: {
     origin: '*',
   },
@@ -24,10 +26,11 @@ app.use(cors());
 //Routes
 app.use('/user', userRoutes);
 app.use('/chat', chatRoutes);
+app.use('/message', messageRoutes);
 app.use('/', (req, res) => {
     res.send("hello")
 })
-
+ 
 //Run when client connects
 io.on('connection', (socket) => {
   console.log('new WS connection..');
