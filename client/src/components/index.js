@@ -7,5 +7,9 @@ export { default as Home } from './Home/Home';
 export { default as SideBar } from './Home/SideBar';
 export { default as ChatScreen } from './Home/ChatScreen';
 export { default as StatusBar } from './Home/StatusBar';
-export { default as Inbox } from './Home/Inbox';
-export { default as Card} from './Home/Card'
+export { default as Card} from './Home/Card';
+//Home->Inbox
+export { default as Inbox } from './Home/Inbox/Inbox';
+export { default as Messages } from './Home/Inbox/Messages';
+export { default as Groups } from './Home/Inbox/Groups';
+export { default as User } from './Home/Inbox/User'

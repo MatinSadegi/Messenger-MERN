@@ -3,6 +3,7 @@ import { Signin, Signup } from '..';
 
 const Auth = () => {
     const [isSignup, setIsSignup] = useState(false);
+    const [err, setErr] = useState("");
     const switchMode = () => {
       setIsSignup((prevIsSignup) => !prevIsSignup);
     };
@@ -18,7 +19,7 @@ const Auth = () => {
               : " Don't have an account ?"}
             <span onClick={switchMode}>{isSignup ? 'Sign In' : 'Sign Up'}</span>
           </p>
-          {isSignup ? <Signup /> : <Signin />}
+          {isSignup ? <Signup setErr={setErr} /> : <Signin setErr={setErr} />}
         </div>
       </div>
     </div>

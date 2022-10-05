@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { useSignUpMutation } from '../../api/apiSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSignUpMutation } from '../../features/auth/authApiSlice';
+import { setProfile } from '../../features/auth/authSlice.js';
 
 const initialState = {
   firstName: '',
@@ -9,15 +12,24 @@ const initialState = {
   confirmPassword: '',
 };
 
-const Signup = () => {
+const Signup = ({ setErr }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
   const [signUp] = useSignUpMutation();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signUp(form);
+    try {
+      const result = await signUp(form).unwrap();
+      dispatch(setProfile(result));
+      navigate('/');
+    } catch (error) {
+      const { errors } = error.data;
+      setErr(errors);
+    }
   };
   return (
     <form onSubmit={handleSubmit} noValidate>
