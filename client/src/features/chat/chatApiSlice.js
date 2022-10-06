@@ -15,7 +15,12 @@ export const chatApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+    fetchAllChats : builder.query({
+      query:() => ({
+        url:'/chat'
+      })
+    })
   }),
 });
 
-export const {useSearchUsersQuery, useCreateChatMutation} = chatApiSlice
+export const {useSearchUsersQuery, useCreateChatMutation , useFetchAllChatsQuery} = chatApiSlice

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, User } from '../../index';
-import { useSearchUsersQuery } from '../../../features/chat/chatApiSlice';
+import { useSearchUsersQuery, useFetchAllChatsQuery } from '../../../features/chat/chatApiSlice';
 import searchIcon from '../../../assets/icons/1492.gif';
 
 const Messages = () => {
@@ -8,7 +8,8 @@ const Messages = () => {
   const [search, setSearch] = useState(false);
   const [skip, setSkip] = useState(true);
   const [searchUser, setSearchUser] = useState('');
-  const { isLoading, isSuccess, currentData, isFetching} = useSearchUsersQuery(
+  const {data ,isLoading} = useFetchAllChatsQuery()
+  const { isSuccess, currentData, isFetching} = useSearchUsersQuery(
     searchUser,
     {
       skip,
@@ -59,8 +60,9 @@ const Messages = () => {
                   firstName={item.firstName}
                   lastName={item.lastName}
                   email={item.email}
-                  id={item._id}
+                  userId={item._id}
                   key={item.email}
+                  setSearch = {setSearch}
                 />
               ))
             ) : null}
@@ -70,7 +72,8 @@ const Messages = () => {
           className='unreaded__container'
           style={{ display: search ? 'none' : 'block' }}
         >
-          <Card />
+          {isLoading && <p>LOADIIIIING</p>}
+          {data && data.length> 0 && data.map(chat=> <Card key={chat._id} user={chat.users[1]}/>)}
         </div>
       </div>
     );
