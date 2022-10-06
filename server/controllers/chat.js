@@ -5,7 +5,6 @@ import User from '../models/user.js';
 export const accessChat = async (req, res) => {
   const { userId } = req.body;
   let chatData;
-
   if (!userId) {
     res.status(400).json('UserId param not sent with request');
   }
@@ -18,13 +17,13 @@ export const accessChat = async (req, res) => {
     ],
   })
     .populate('users', '-password')
-    .populate('latesMessage');
-  isChat = await User.populate(isChat, {
-    path: 'latestMessage.sender',
-    select: 'firstName lastName email',
-  });
+  // isChat = await User.populate(isChat, {
+  //   path: 'latestMessage.sender',
+  //   select: 'firstName lastName email',
+  // });
   if (isChat.length > 0) {
     res.send(isChat[0]);
+    console.log(isChat[0])
   } else {
     chatData = {
       chatName: 'sender',
@@ -48,12 +47,12 @@ export const fetchChats = async (req, res) => {
       users: { $elemMatch: { $eq: req.user._id } },
     })
       .populate('users', '-password')
-      .populate('latestMessage')
-      .sort({ updatedAt: -1 });
-    allChats = await User.populate(allChats, {
-      path: 'latestMessage.sender',
-      select: 'firstName lastName email',
-    });
+      // .populate('latestMessage')
+    //   .sort({ updatedAt: -1 });
+    // allChats = await User.populate(allChats, {
+    //   path: 'latestMessage.sender',
+    //   select: 'firstName lastName email',
+    // });
     res.status(200).json(allChats);
   } catch (error) {
     console.log(error);

@@ -37,7 +37,7 @@ export const signIn = async (req, res) => {
     .status(200)
     .json({ existingUser, token: generateToken(existingUser._id) });
 };
-
+ 
 //GET All users
 export const getUsers = async (req, res) => {
   const keyword = req.query.search
