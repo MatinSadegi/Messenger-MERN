@@ -6,6 +6,7 @@ export const chatApiSlice = apiSlice.injectEndpoints({
       query: (user) => ({
         url: `/user?search=${user}`,
       }),
+      // providesTags:(result,error,user) => [{type:'User', user }]
     }),
     createChat: builder.mutation({
       query: (userId) => ({

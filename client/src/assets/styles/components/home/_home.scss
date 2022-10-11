@@ -2,7 +2,6 @@
 @use './statusbar';
 @use './inbox';
 @use './chatscreen';
-@use './card';
 @use '../../abstracts/abstracts' as *;
 .home{
     display: grid;

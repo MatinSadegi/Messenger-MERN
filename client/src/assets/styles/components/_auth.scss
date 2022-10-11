@@ -1,4 +1,4 @@
-@use '../abstracts/abstracts' as *;
+@use "../abstracts/abstracts" as *;
 .auth {
   width: 100vw;
   height: 100vh;
@@ -34,7 +34,7 @@
         font-size: 0.8rem;
         span {
           margin-left: 2px;
-          color: $sky-blue;
+          color: $sky-500;
           cursor: pointer;
         }
       }
@@ -72,7 +72,7 @@
           border: none;
           width: 50%;
           border-radius: 1rem;
-          background-color: $sky-blue;
+          background-color: $sky-500;
           color: white;
         }
       }
@@ -85,7 +85,7 @@
     .auth__form-container {
       width: 95%;
       .auth__form-container_fields {
-          width: 70%;
+        width: 70%;
       }
     }
   }
@@ -98,12 +98,12 @@
       background-position: top;
       justify-content: center;
       .auth__form-container_fields {
-          width: 80%;
-          margin:0;
-          margin-top: 6rem;
-          form{
-            width: 100%;
-          }
+        width: 80%;
+        margin: 0;
+        margin-top: 6rem;
+        form {
+          width: 100%;
+        }
       }
     }
   }

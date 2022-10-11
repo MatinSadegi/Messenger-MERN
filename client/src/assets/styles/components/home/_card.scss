@@ -1,14 +1,23 @@
-@use '../../abstracts/abstracts' as *;
+@use "../../abstracts/abstracts" as *;
 .card {
   display: flex;
+  cursor: default;
   justify-content: space-between;
   align-items: center;
   font-size: 0.6rem;
-  padding: 0.6rem 0;
+  padding: 1rem;
+  background-color: $slate-100;
   border-bottom: 1px solid $grey;
+  &:first-child {
+    border-radius: 10px 10px 0 0;
+  }
   &:last-child {
     border: none;
+    border-radius: 0 0 10px 10px;
   }
+  .card__left{
+    display: flex;
+    align-items: center;
   .card__profile {
     position: relative;
     width: 2.5rem;
@@ -16,7 +25,7 @@
     border-radius: 50%;
     background-color: rgb(235, 173, 72);
     &::after {
-      content: '';
+      content: "";
       width: 0.5rem;
       height: 0.5rem;
       border: 1px solid $slate-100;
@@ -28,7 +37,7 @@
     }
   }
   .card__info {
-    margin-right: 3rem;
+    margin-left: 0.7rem;
     p {
       font-weight: 300;
       &:first-child {
@@ -37,6 +46,8 @@
       }
     }
   }
+  }
+
   .card__status {
     font-weight: 600;
     display: flex;

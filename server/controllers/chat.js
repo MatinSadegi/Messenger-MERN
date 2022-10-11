@@ -23,7 +23,6 @@ export const accessChat = async (req, res) => {
   // });
   if (isChat.length > 0) {
     res.send(isChat[0]);
-    console.log(isChat[0])
   } else {
     chatData = {
       chatName: 'sender',
