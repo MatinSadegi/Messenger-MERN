@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import {CreateGroupCard} from '../../../index';
+import { CreateGroupCard,Card } from "../../../index";
+import { useFetchAllChatsQuery } from "../../../../features/chat/chatApiSlice";
 
 
 const Groups = () => {
   const [createGroup, setCreateGroup] = useState(false);
+  const { data, isLoading } = useFetchAllChatsQuery();
+
   return (
     <div>
       <div className="section-name">
@@ -14,10 +17,12 @@ const Groups = () => {
           onClick={() => setCreateGroup(true)}
         />
       </div>
-      <div className="search__container">
-        <div className="search-result__container"></div>
+      <div className="unreaded__container">
+        {isLoading && <span className="loader"></span>}
+        {data &&
+          data.length > 0 &&
+          data.map((chat) => chat.isGroupChat && <Card key={chat._id} chat={chat}/>)}
       </div>
-      <div className="unreaded__container"></div>
       <CreateGroupCard
         createGroup={createGroup}
         setCreateGroup={setCreateGroup}

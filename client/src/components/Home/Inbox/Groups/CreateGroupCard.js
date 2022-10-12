@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import { useSearchUsersQuery } from "../../../../features/chat/chatApiSlice";
+import { useSearchUsersQuery, useCreateGroupChatMutation } from "../../../../features/chat/chatApiSlice";
 import { SearchResult } from "../../../index";
 
 const CreateGroupCard = ({ createGroup, setCreateGroup }) => {
   const [skip, setSkip] = useState(true);
   const [groupInfo, setGroupInfo] = useState({ groupName: "", users: [] });
   const [searchUser, setSearchUser] = useState("");
+  const [createGroupChat] = useCreateGroupChatMutation()
   const { currentData, isFetching } = useSearchUsersQuery(searchUser, {
     skip,
   });
+  const createGroupHandler = async() => {
+    const {data} = await createGroupChat(groupInfo)
+    console.log(data)
+  }
   return (
     <div
       className="groupchat-builder__container"
@@ -80,7 +85,7 @@ const CreateGroupCard = ({ createGroup, setCreateGroup }) => {
             </div>
           )}
         </div>
-        <button>Create</button>
+        <button onClick={createGroupHandler}>Create</button>
       </div>
     </div>
   );

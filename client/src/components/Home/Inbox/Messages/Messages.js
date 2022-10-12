@@ -77,7 +77,7 @@ const Messages = () => {
         {isLoading && <span className="loader"></span>}
         {data &&
           data.length > 0 &&
-          data.map((chat) => <Card key={chat._id} chat={chat} />)}
+          data.map((chat) => !chat.isGroupChat && <Card key={chat._id} chat={chat} />)}
       </div>
     </div>
   );

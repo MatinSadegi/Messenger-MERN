@@ -7,11 +7,23 @@ const Card = ({ chat }) => {
   return (
     <div className="card" onClick={() => dispatch(setSelectedChat(chat))}>
       <div className="card__left">
-        <div className="card__profile"></div>
+          {chat.isGroupChat ? (
+            (<div className="card__profile-group">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>)
+          ) : (
+            <div className="card__profile-user"></div>
+          )}
         <div className="card__info">
-          <p>
-            {chat.users[1].firstName} {chat.users[1].lastName}
-          </p>
+          {chat.isGroupChat ? (
+            <p>{chat.chatName}</p>
+          ) : (
+            <p>
+              {chat.users[1].firstName} {chat.users[1].lastName}
+            </p>
+          )}
           <p>Hi there, how are you?</p>
         </div>
       </div>
