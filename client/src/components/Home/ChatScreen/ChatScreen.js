@@ -1,11 +1,45 @@
-import React, { useEffect } from 'react';
-import io from 'socket.io-client';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import {Sender} from '../../index'
+import io from "socket.io-client";
+import { useSelector } from "react-redux";
+import {
+  useFetchAllMessageQuery,
+  useSendMessageMutation,
+} from "../../../features/message/MessageApiSlice";
 
 const ChatScreen = () => {
   const currentChat = useSelector((state) => state.chat.selectedChat);
+  const [messages, setMessages] = useState([]);
+  const [skip, setSkip] = useState(true);
+  const [newMessage, setNewMessage] = useState("");
+  const [sendMessage] = useSendMessageMutation();
+  const { isFetching, currentData } = useFetchAllMessageQuery(
+    (currentChat && currentChat._id),
+    { skip }
+  );
+
+  const sendMessageHandler = async (e) => {
+    if (e.key === "Enter" && newMessage.trim()) {
+      setNewMessage("");
+      const { data } = await sendMessage({
+        content: newMessage,
+        chatId: currentChat._id,
+      });
+      setMessages([...messages, data]);
+      setSkip(false);
+    }
+  };
+  const typeHandler = (e) => {
+    setNewMessage(e.target.value);
+  };
   useEffect(() => {
-    io('http://localhost:5000');
+    if (currentChat) {
+      setSkip(false);
+    }
+  }, [currentChat]);
+
+  useEffect(() => {
+    io("http://localhost:5000");
   }, []);
   return (
     <div className="chat-screen__container">
@@ -54,8 +88,21 @@ const ChatScreen = () => {
               />
             </div>
           </div>
-          <div className="send-message">
-            <input type="text" placeholder="Writte a message..." />
+          <div className="chat-screen__main">
+            {isFetching && (
+              <div className="loader__container">
+                <span className="loader"></span>
+              </div>
+            )}
+            {currentData && !isFetching && currentData.map(message => <Sender key={message._id} message={message}/>)}
+          </div>
+          <div className="send-message" onKeyDown={sendMessageHandler}>
+            <input
+              type="text"
+              placeholder="Write a message..."
+              value={newMessage}
+              onChange={typeHandler}
+            />
             <img
               src="https://img.icons8.com/external-anggara-basic-outline-anggara-putra/20/ffffff/external-send-email-interface-anggara-basic-outline-anggara-putra.png"
               alt="send"

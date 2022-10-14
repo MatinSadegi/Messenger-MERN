@@ -1,4 +1,4 @@
-@use '../../abstracts/abstracts' as *;
+@use "../../abstracts/abstracts" as *;
 .chat-screen__container {
   .start-chat {
     display: flex;
@@ -16,8 +16,8 @@
     display: flex;
     height: 100%;
     flex-direction: column;
-    justify-content: space-between;
-    .chat-screen__header {
+
+    &__header {
       border-bottom: 1px solid $slate-100;
       width: 100%;
       padding: 1.5rem;
@@ -28,45 +28,45 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    .card__profile-group {
-      display: flex;
-      position: relative;
-      width: 4.5rem;
-      div {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-        background-color: rgb(255, 208, 132);
-        &:nth-child(2) {
-          background-color: rgb(136, 154, 255);
-          position: absolute;
-          left: 1rem;
+        .card__profile-group {
+          display: flex;
+          position: relative;
+          width: 4.5rem;
+          div {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgb(255, 208, 132);
+            &:nth-child(2) {
+              background-color: rgb(136, 154, 255);
+              position: absolute;
+              left: 1rem;
+            }
+            &:nth-child(3) {
+              background-color: rgb(255, 165, 249);
+              position: absolute;
+              left: 2rem;
+            }
+          }
         }
-        &:nth-child(3) {
-          background-color: rgb(255, 165, 249);
-          position: absolute;
-          left: 2rem;
+        .card__profile-user {
+          position: relative;
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          background-color: rgb(235, 173, 72);
+          &::after {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            border: 1px solid $slate-100;
+            border-radius: 50%;
+            background-color: $lime-green;
+            position: absolute;
+            right: 0.2rem;
+            bottom: 0;
+          }
         }
-      }
-    }
-    .card__profile-user {
-      position: relative;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      background-color: rgb(235, 173, 72);
-      &::after {
-        content: "";
-        width: 0.5rem;
-        height: 0.5rem;
-        border: 1px solid $slate-100;
-        border-radius: 50%;
-        background-color: $lime-green;
-        position: absolute;
-        right: 0.2rem;
-        bottom: 0;
-      }
-    }
         .card__info {
           margin-left: 0.7rem;
           p {
@@ -91,28 +91,66 @@
         }
       }
     }
+    &__main {
+      height: 100%;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column-reverse;
+      .loader__container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .loader {
+          width: 8rem;
+          height: 8rem;
+          border-radius: 50%;
+          display: inline-block;
+          border-top: 3px solid $DodgerBlue;
+          border-right: 3px solid transparent;
+          box-sizing: border-box;
+          animation: rotation 1s linear infinite;
+        }
+      }
+      .message__container{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        .message{
+          position: relative;
+          margin-bottom: 0.5rem;
+          padding: 0.3rem 0.7rem;
+          border-radius: 1rem 1rem 0 1rem;
+          font-weight: 300;
+          font-size: 0.8rem;
+          color: white;
+          background-color: #3b82f6;
+        }
+      }
+    }
     .send-message {
       width: 100%;
-      height: 4rem;
+      height: 5rem;
       padding: 0 3rem;
       position: relative;
       display: flex;
       align-items: center;
-      input{
+      input {
         width: 100%;
         height: 100%;
         border: none;
         border-top: 1px solid $grey;
         padding-bottom: 0.5rem;
         outline: none;
-        &::placeholder{
+        &::placeholder {
           font-size: 0.8rem;
         }
       }
-      img{
+      img {
         position: absolute;
         right: 3rem;
-        bottom: 1.2rem;
+        bottom: 1rem;
         background-color: $DodgerBlue;
         border-radius: 0.4rem;
         padding: 0.4rem;

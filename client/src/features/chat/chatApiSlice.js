@@ -6,22 +6,34 @@ export const chatApiSlice = apiSlice.injectEndpoints({
       query: (user) => ({
         url: `/user?search=${user}`,
       }),
-      // providesTags:(result,error,user) => [{type:'User', user }]
     }),
     createChat: builder.mutation({
       query: (userId) => ({
-        url: '/chat',
-        method: 'POST',
+        url: "/chat",
+        method: "POST",
         body: userId,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
-    fetchAllChats : builder.query({
-      query:() => ({
-        url:'/chat'
-      })
-    })
+    fetchAllChats: builder.query({
+      query: () => ({
+        url: "/chat",
+      }),
+    }),
+    createGroupChat: builder.mutation({
+      query: (groupInfo) => ({
+        url: "/chat/group",
+        method: "POST",
+        body: groupInfo,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const {useSearchUsersQuery, useCreateChatMutation , useFetchAllChatsQuery} = chatApiSlice
+export const {
+  useSearchUsersQuery,
+  useCreateChatMutation,
+  useFetchAllChatsQuery,
+  useCreateGroupChatMutation,
+} = chatApiSlice;

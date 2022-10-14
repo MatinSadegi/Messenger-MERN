@@ -1,9 +1,10 @@
+import Chat from '../models/chat.js';
 import Message from '../models/message.js';
 
 //POST send message
 export const sendMessage = async (req, res) => {
   const { content, chatId } = req.body;
-  if (!content || chatId) {
+  if (!content || !chatId) {
     console.log('Invalid data passed into request');
     return res.status(400);
   }
@@ -12,9 +13,15 @@ export const sendMessage = async (req, res) => {
     content,
     chatId,
   };
+
   try {
     let message = await Message.create(newMessage);
     message = await message.populate('sender', '-password');
+
+    await Chat.findByIdAndUpdate(req.body.chatId,{
+      latestMessage : message
+    })
+    res.status(200).json(message)
   } catch (error) {
     res.status(400).json({ messages: error });
   }
@@ -23,7 +30,7 @@ export const sendMessage = async (req, res) => {
 //GET get all message
 export const allMessages = async (req, res) => {
   try {
-    const messages = await Message.find({ chat: req.params.chatId }).populate(
+    const messages = await Message.find({ chatId: req.params.chatId }).populate(
       'sender',
       '-password'
     );
@@ -32,3 +39,4 @@ export const allMessages = async (req, res) => {
     res.status(400).json({message: error});
   }
 };
+ 

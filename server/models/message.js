@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const messageSchema = mongoose.Schema({
   sender: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  contact: { type: String, trim: true },
+  content: { type: String, trim: true },
   chatId: { type: mongoose.Schema.Types.ObjectId, ref: 'Chat' },
 },{timestamps :true});
 
