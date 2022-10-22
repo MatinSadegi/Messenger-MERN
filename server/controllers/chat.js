@@ -15,29 +15,32 @@ export const accessChat = async (req, res) => {
       { users: { $elemMatch: { $eq: req.user._id } } },
       { users: { $elemMatch: { $eq: userId } } },
     ],
-  })
-    .populate('users', '-password')
+  }).populate('users', '-password')
   // isChat = await User.populate(isChat, {
   //   path: 'latestMessage.sender',
   //   select: 'firstName lastName email',
   // });
+  console.log(req.user._id , userId);
+  console.log(isChat)
+
   if (isChat.length > 0) {
     res.send(isChat[0]);
   } else {
     chatData = {
-      chatName: 'sender',
+      chatName: "sender",
       isGroupChat: false,
       users: [req.user._id, userId],
     };
+
+    try {
+      const createdChat = await Chat.create(chatData);
+      const fullChat = await Chat.findOne({ _id: createdChat._id }).populate(
+        "users",
+        "-password"
+      );
+      res.status(200).json(fullChat);
+    } catch (error) {}
   }
-  try {
-    const createdChat = await Chat.create(chatData);
-    const fullChat = await Chat.findOne({ _id: createdChat._id }).populate(
-      'users',
-      '-password'
-    );
-    res.status(200).json(fullChat);
-  } catch (error) {}
 };
 //GET fetch all chats
 export const fetchChats = async (req, res) => {
@@ -46,12 +49,12 @@ export const fetchChats = async (req, res) => {
       users: { $elemMatch: { $eq: req.user._id } },
     })
       .populate('users', '-password')
-      // .populate('latestMessage')
-    //   .sort({ updatedAt: -1 });
-    // allChats = await User.populate(allChats, {
-    //   path: 'latestMessage.sender',
-    //   select: 'firstName lastName email',
-    // });
+      .populate('latestMessage')
+      .sort({ updatedAt: -1 });
+    allChats = await User.populate(allChats, {
+      path: 'latestMessage.sender',
+      select: 'firstName lastName email',
+    });
     res.status(200).json(allChats);
   } catch (error) {
     console.log(error);

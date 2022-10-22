@@ -1,11 +1,14 @@
 @use "../../abstracts/abstracts" as *;
 .result {
-  //   cursor: pointer;
-  //   > p {
-  //     text-align: center;
-  //     color: red;
-  //   }
-
+  width: 100%;
+  > img {
+    display: block;
+    margin: auto;
+  }
+  > p {
+    text-align: center;
+    color: red;
+  }
   .user__container {
     display: flex;
     align-items: center;

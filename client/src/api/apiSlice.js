@@ -9,6 +9,6 @@ export const apiSlice = createApi({
     }
     return headers
   } }),
-  tagTypes: ['Form', 'User'],
+  tagTypes: ['Form', 'User', 'Message'],
   endpoints: builder => ({})
 });

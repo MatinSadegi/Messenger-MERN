@@ -34,7 +34,25 @@ app.use('/', (req, res) => {
 //Run when client connects
 io.on('connection', (socket) => {
   console.log('new WS connection..');
-});
-
+  socket.on('setup', async(userData) =>{
+    socket.join(userData._id);
+    // socket.emit("connected")
+    console.log(userData._id)
+    
+  })
+  socket.on('join chat', (room) => {
+    socket.join(room);
+    console.log(`User joined ${room}`)
+  })
+  socket.on('new message', (newMessageReceived)=>{
+    let chat = newMessageReceived.chatId;
+    if(!chat.users) return console.log("users not defined");
+    chat.users.forEach(user => {
+      if(user._id === newMessageReceived.sender._id)return;
+      socket.in(user._id).emit("message received", newMessageReceived)
+    });  
+  })  
+});   
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, console.log(`server is running on port ${PORT}`));
+ 

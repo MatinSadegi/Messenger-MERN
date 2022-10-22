@@ -11,12 +11,17 @@ const Messages = () => {
   const [skip, setSkip] = useState(true);
   const [searchUser, setSearchUser] = useState("");
   const { data, isLoading } = useFetchAllChatsQuery();
+  const [createChatStatus, setCreateChatStatus] = useState({
+    loading: false,
+    success: false,
+  });
   const { isSuccess, currentData, isFetching } = useSearchUsersQuery(
     searchUser,
     {
       skip,
     }
   );
+
   const findUser = () => {
     setSkip(false);
   };
@@ -51,7 +56,13 @@ const Messages = () => {
             />
           </div>
         </div>
-        <div className="result">
+        <p className="accessing-chat" style={{ display: createChatStatus.loading ? "block" : "none" }}>
+          accessing chat ...
+        </p>
+        <div
+          style={{ display: createChatStatus.loading ? "none" : "block" }}
+          className="result"
+        >
           {isFetching ? (
             <img src={searchIcon} alt="searchIcon" />
           ) : isSuccess && currentData && !currentData.length ? (
@@ -65,6 +76,7 @@ const Messages = () => {
                 userId={item._id}
                 key={item.email}
                 setSearch={setSearch}
+                setCreateChatStatus={setCreateChatStatus}
               />
             ))
           ) : null}
@@ -77,7 +89,9 @@ const Messages = () => {
         {isLoading && <span className="loader"></span>}
         {data &&
           data.length > 0 &&
-          data.map((chat) => !chat.isGroupChat && <Card key={chat._id} chat={chat} />)}
+          data.map(
+            (chat) => !chat.isGroupChat && <Card key={chat._id} chat={chat} />
+          )}
       </div>
     </div>
   );

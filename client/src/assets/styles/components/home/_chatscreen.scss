@@ -1,4 +1,26 @@
 @use "../../abstracts/abstracts" as *;
+@mixin message($br: 1rem 1rem 0 1rem, $bc: DodgerBlue, $fd:row, $margin:0 0 0 0.4rem) {
+  position: relative;
+  margin-bottom: 0.5rem;
+  padding: 0 0.5rem;
+  border-radius: $br;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: white;
+  background-color: $bc;
+  p {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0;
+    flex-direction: $fd;
+    span {
+      font-size: 0.5rem;
+      margin: $margin;
+      align-self: flex-end;
+      transform: translateY(5px);
+    }
+  }
+}
 .chat-screen__container {
   .start-chat {
     display: flex;
@@ -113,19 +135,46 @@
           animation: rotation 1s linear infinite;
         }
       }
-      .message__container{
+      .message__container {
         width: 100%;
         display: flex;
         justify-content: flex-end;
-        .message{
-          position: relative;
-          margin-bottom: 0.5rem;
-          padding: 0.3rem 0.7rem;
-          border-radius: 1rem 1rem 0 1rem;
-          font-weight: 300;
-          font-size: 0.8rem;
-          color: white;
-          background-color: #3b82f6;
+        // .message__send {
+        //   position: relative;
+        //   margin-bottom: 0.5rem;
+        //   padding: 0 0.7rem;
+        //   border-radius: 1rem 1rem 0 1rem;
+        //   font-weight: 300;
+        //   font-size: 0.8rem;
+        //   color: white;
+        //   background-color: $DodgerBlue;
+        //   p {
+        //     display: flex;
+        //     align-items: center;
+        //     padding: 0.4rem 0;
+        //     span {
+        //       font-size: 0.5rem;
+        //       margin-left: 0.4rem;
+        //       align-self: flex-end;
+        //       transform: translateY(5px);
+        //     }
+        //   }
+        // }
+        // .message__receive {
+        //   position: relative;
+        //   margin-bottom: 0.5rem;
+        //   padding: 0 0.7rem;
+        //   border-radius: 1rem 1rem 1rem 0;
+        //   font-weight: 300;
+        //   font-size: 0.8rem;
+        //   color: white;
+        //   background-color: red;
+        // }
+        .message__send{
+          @include message
+        }
+        .message__receive{
+          @include message($br:1rem 1rem 1rem 0, $bc:red, $fd:row-reverse, $margin:0 0.4rem 0 0 )
         }
       }
     }

@@ -1,23 +1,56 @@
 import React, { useEffect, useState } from "react";
-import {Sender} from '../../index'
-import io from "socket.io-client";
-import { useSelector } from "react-redux";
+import { Sender } from "../../index";
+import { io } from "socket.io-client";
+import { useSelector, useDispatch } from "react-redux";
+import { setReceivedMessages } from "../../../features/message/messageSlice";
 import {
   useFetchAllMessageQuery,
   useSendMessageMutation,
-} from "../../../features/message/MessageApiSlice";
-
+} from "../../../features/message/messageApiSlice";
+let socket, selectedChatCompare;
 const ChatScreen = () => {
+  const dispatch = useDispatch();
   const currentChat = useSelector((state) => state.chat.selectedChat);
+  const signedUser = useSelector((state) => state.auth.user.existingUser);
+  const newMessages = useSelector((state) => state.message.receivedMessages);
+  const [socketConnected, setSocketConnected] = useState(false);
   const [messages, setMessages] = useState([]);
   const [skip, setSkip] = useState(true);
   const [newMessage, setNewMessage] = useState("");
   const [sendMessage] = useSendMessageMutation();
-  const { isFetching, currentData } = useFetchAllMessageQuery(
-    (currentChat && currentChat._id),
-    { skip }
-  );
+  const { isFetching, currentData, isSuccess} =
+    useFetchAllMessageQuery(currentChat && currentChat._id, {
+      skip,
+      refetchOnMountOrArgChange: true,
+    });
 
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+    socket.emit("setup", signedUser);
+    socket.on("connected", () => setSocketConnected(true));
+  }, []);
+  useEffect(() => {
+    if (currentChat) {
+      setSkip(false);
+      if (isSuccess && currentData) {
+        setMessages(currentData);
+      }
+      socket.emit("join chat", currentChat._id);
+    }
+    selectedChatCompare= currentChat
+  }, [currentChat, currentData]);
+
+  useEffect(() => {
+    socket.on("message received", (newMessageReceived) => {
+
+        if (!selectedChatCompare || newMessageReceived.chatId._id !== selectedChatCompare._id ) {
+          dispatch(setReceivedMessages(newMessageReceived));
+        } else {
+          setMessages([...messages, newMessageReceived]);
+          console.log(newMessageReceived);
+        }
+    });
+  });
   const sendMessageHandler = async (e) => {
     if (e.key === "Enter" && newMessage.trim()) {
       setNewMessage("");
@@ -26,21 +59,13 @@ const ChatScreen = () => {
         chatId: currentChat._id,
       });
       setMessages([...messages, data]);
-      setSkip(false);
+      socket.emit("new message", data);
     }
   };
   const typeHandler = (e) => {
     setNewMessage(e.target.value);
   };
-  useEffect(() => {
-    if (currentChat) {
-      setSkip(false);
-    }
-  }, [currentChat]);
 
-  useEffect(() => {
-    io("http://localhost:5000");
-  }, []);
   return (
     <div className="chat-screen__container">
       {!currentChat ? (
@@ -64,7 +89,11 @@ const ChatScreen = () => {
                 <p>
                   {currentChat.isGroupChat
                     ? currentChat.chatName
-                    : `${currentChat.users[1].firstName} ${currentChat.users[1].lastName}`}
+                    : currentChat.users.map((user) => {
+                        if (user._id !== signedUser._id) {
+                          return `${user.firstName} ${user.lastName}`;
+                        }
+                      })}
                 </p>
                 <p>
                   {currentChat.isGroupChat
@@ -94,7 +123,13 @@ const ChatScreen = () => {
                 <span className="loader"></span>
               </div>
             )}
-            {currentData && !isFetching && currentData.map(message => <Sender key={message._id} message={message}/>)}
+            {messages &&
+              !isFetching &&
+              [...messages].reverse().map((message) => {
+                if (message.chatId._id === currentChat._id) {
+                  return <Sender key={message._id} message={message} />;
+                }
+              })}
           </div>
           <div className="send-message" onKeyDown={sendMessageHandler}>
             <input

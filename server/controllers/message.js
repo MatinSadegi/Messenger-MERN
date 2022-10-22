@@ -1,5 +1,6 @@
 import Chat from '../models/chat.js';
 import Message from '../models/message.js';
+import User from '../models/user.js';
 
 //POST send message
 export const sendMessage = async (req, res) => {
@@ -16,8 +17,10 @@ export const sendMessage = async (req, res) => {
 
   try {
     let message = await Message.create(newMessage);
-    message = await message.populate('sender', '-password');
-
+    message = await (await message.populate('sender', '-password')).populate('chatId');
+    message = await User.populate(message,{
+      path:'chatId.users'
+    })
     await Chat.findByIdAndUpdate(req.body.chatId,{
       latestMessage : message
     })
@@ -33,7 +36,7 @@ export const allMessages = async (req, res) => {
     const messages = await Message.find({ chatId: req.params.chatId }).populate(
       'sender',
       '-password'
-    );
+    ).populate('chatId');
     res.status(200).json(messages)
   } catch (error) {
     res.status(400).json({message: error});
