@@ -5,7 +5,9 @@ export { default as Signin } from "./Auth/Signin";
 //Home
 export { default as Home } from "./Home/Home";
 export { default as SideBar } from "./Home/SideBar";
-export { default as StatusBar } from "./Home/StatusBar";
+//Home->Profile
+export { default as StatusBar } from "./Home/Profile/StatusBar";
+export { default as Profile } from "./Home/Profile/Profile";
 //Home->ChatScreen
 export { default as ChatScreen } from "./Home/ChatScreen/ChatScreen";
 export { default as Sender } from "./Home/ChatScreen/Sender";

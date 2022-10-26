@@ -2,9 +2,10 @@
 @use './statusbar';
 @use './inbox';
 @use './chatscreen';
+@use './profile';
 @use '../../abstracts/abstracts' as *;
 .home{
     display: grid;
-    grid-template-columns: 3fr 5fr 12fr 1fr;
+    grid-template-columns: 1.5fr 3fr 8fr 1fr;
     height: 100vh;
 }
