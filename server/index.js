@@ -16,12 +16,12 @@ const io = new Server(server, {
   pingTimeout:60000,
   cors: {
     origin: '*',
-  },
+  }, 
 });
 dotenv.config();
 connectDB()
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 //Routes
 app.use('/user', userRoutes);
@@ -29,8 +29,8 @@ app.use('/chat', chatRoutes);
 app.use('/message', messageRoutes);
 app.use('/', (req, res) => {
     res.send("hello")
-})
- 
+}) 
+   
 //Run when client connects
 io.on('connection', (socket) => {
   console.log('new WS connection..');

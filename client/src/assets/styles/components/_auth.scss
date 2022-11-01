@@ -1,4 +1,15 @@
 @use "../abstracts/abstracts" as *;
+%custom-input {
+  display: block;
+  border: none;
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 0.6rem;
+  color: white;
+  background-color: rgb(52, 52, 52);
+  outline: none;
+}
 .auth {
   width: 100vw;
   height: 100vh;
@@ -41,16 +52,20 @@
       form {
         margin-top: 15px;
         width: 60%;
+        label {
+          > input {
+            display: none;
+          }
+          @extend %custom-input;
+          font-size: 0.8rem;
+          font-weight: 500;
+          background-color: rgb(255, 255, 255);
+          color: black;
+          text-align: center;
+          width: 100%
+        }
         input {
-          display: block;
-          border: none;
-          margin-top: 15px;
-          width: 100%;
-          padding: 10px;
-          border-radius: 0.6rem;
-          color: white;
-          background-color: rgb(52, 52, 52);
-          outline: none;
+       @extend %custom-input;
           &::placeholder {
             color: $grey;
             font-size: 0.7rem;

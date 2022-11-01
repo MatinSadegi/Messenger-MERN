@@ -1,4 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&family=Raleway:wght@200;400;600&display=swap");
+.auth .auth__form-container .auth__form-container_fields form input, .auth .auth__form-container .auth__form-container_fields form label {
+  display: block;
+  border: none;
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 0.6rem;
+  color: white;
+  background-color: rgb(52, 52, 52);
+  outline: none;
+}
+
 .auth {
   width: 100vw;
   height: 100vh;
@@ -45,16 +57,16 @@
   margin-top: 15px;
   width: 60%;
 }
-.auth .auth__form-container .auth__form-container_fields form input {
-  display: block;
-  border: none;
-  margin-top: 15px;
+.auth .auth__form-container .auth__form-container_fields form label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  text-align: center;
   width: 100%;
-  padding: 10px;
-  border-radius: 0.6rem;
-  color: white;
-  background-color: rgb(52, 52, 52);
-  outline: none;
+}
+.auth .auth__form-container .auth__form-container_fields form label > input {
+  display: none;
 }
 .auth .auth__form-container .auth__form-container_fields form input::placeholder {
   color: #e8e6e6;
@@ -146,16 +158,34 @@
 .status-bar__container {
   border-left: 1px solid #f1f5f9;
   padding: 1.5rem 0;
+  overflow: hidden;
+}
+.status-bar__container .status-bar__top {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
 }
-.status-bar__container .status-bar__top div {
-  width: 2.5rem;
-  height: 2.5rem;
+.status-bar__container .status-bar__top .profile-img {
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  background-color: rgb(105, 185, 255);
+  padding: 0;
+  object-fit: cover;
+}
+.status-bar__container .status-bar__top .items {
+  width: 100%;
+  margin-top: 0.7rem;
+}
+.status-bar__container .status-bar__top .items p {
+  font-weight: 400;
+  font-size: 0.7rem;
+  width: 100%;
+  text-align: center;
+  padding: 0.4rem 0;
+  background-color: #0284c7;
+  color: white;
+  margin-top: 0.2rem;
 }
 .status-bar__container img {
   border: 1px solid #e8e6e6;
@@ -634,9 +664,53 @@
   padding: 0.4rem;
 }
 
+.profile {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.profile__container {
+  position: absolute;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 1rem;
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 1rem;
+}
+.profile__container > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile__container > div > img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+.profile__container > div .name {
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
 .home {
   display: grid;
-  grid-template-columns: 3fr 5fr 12fr 1fr;
+  grid-template-columns: 1.5fr 3fr 8fr 1fr;
   height: 100vh;
 }
 

@@ -27,12 +27,13 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      > div {
+      > img {
         width: 5rem;
         height: 5rem;
+        object-fit: cover;
         border-radius: 50%;
-        background-color: rgb(98, 238, 186);
         margin-bottom: 1rem;
+        padding: 0;
       }
       .name {
         font-weight: 500;

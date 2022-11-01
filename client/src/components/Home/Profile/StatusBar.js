@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {Profile} from '../../index'
+import { useSelector } from "react-redux";
+import { Profile } from "../../index";
 import { showItemsVariants } from "../../../assets/FramerMotionVariants/variants.js";
 
 const StatusBar = () => {
   const [showItems, setShowItems] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const userInfo = useSelector((state) => state.auth.user.user);
   return (
     <div className="status-bar__container">
       <div className="status-bar__top">
-        <div
+        <img
+          src={`${userInfo.avatar.url}`}
           className="profile-img"
           onClick={() => setShowItems(!showItems)}
-        ></div>
+        />
+
         <motion.div
           className="items"
           initial={false}

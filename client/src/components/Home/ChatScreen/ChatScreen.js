@@ -11,8 +11,7 @@ let socket, selectedChatCompare;
 const ChatScreen = () => {
   const dispatch = useDispatch();
   const currentChat = useSelector((state) => state.chat.selectedChat);
-  const signedUser = useSelector((state) => state.auth.user.existingUser);
-  const newMessages = useSelector((state) => state.message.receivedMessages);
+  const signedUser = useSelector((state) => state.auth.user.user);
   const [socketConnected, setSocketConnected] = useState(false);
   const [messages, setMessages] = useState([]);
   const [skip, setSkip] = useState(true);

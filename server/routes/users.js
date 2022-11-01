@@ -1,73 +1,75 @@
-import express from 'express';
-import bcrypt from 'bcryptjs';
-import { signIn, signUp, getUsers } from '../controllers/users.js';
-import { check, body } from 'express-validator';
-import { protect } from '../middleware/auth.js';
-import User from '../models/user.js';
-const router = express.Router();
+import express from "express";
+import bcrypt from "bcryptjs";
+import { signIn, signUp, getUsers } from "../controllers/users.js";
+import { check, body } from "express-validator";
+import { protect } from "../middleware/auth.js";
+import User from "../models/user.js";
 
-router.post(
-  '/signup',
-  body('firstName')
+const router = express.Router();  
+router.post( 
+  "/signup", 
+  // upload.single("avatar"),
+  body("firstName") 
+    .not()
+    .isEmpty()
+    .trim()
+    .escape() 
+    .withMessage("First Name is Empty"),
+  body("lastName")
     .not()
     .isEmpty()
     .trim()
     .escape()
-    .withMessage('First Name is Empty'),
-  body('lastName')
-    .not()
-    .isEmpty()
-    .trim()
-    .escape()
-    .withMessage('Last Name is Empty'),
-  check('email')
+    .withMessage("Last Name is Empty"),
+  body("email")
     .isEmail()
-    .withMessage('invalid E-mail')
+    .withMessage("invalid E-mail")
     .custom(async (value) => {
-      const existingUser = await User.findOne({ value });
+      const existingUser = await User.findOne({email:value})
+      console.log(value)
+      console.log(existingUser);
       if (existingUser) {
-        throw new Error('E-mail already in use');
+        throw new Error("E-mail already in use");
       }
     }),
-  body('password')
+  body("password") 
     .isLength({ min: 5 })
-    .withMessage('must be at least 5 chars long'),
-  body('confirmPassword').custom((value, { req }) => {
+    .withMessage("must be at least 5 chars long"),
+  body("confirmPassword").custom((value, { req }) => {
     if (value !== req.body.password) {
-      throw new Error('Password confirmation does not match password');
+      throw new Error("Password confirmation does not match password");
     }
-    return true
+    return true;
   }),
-
   signUp
 );
 router.post(
-  '/signin',
-  check('email')
+  "/signin",
+  check("email")
     .isEmail()
-    .withMessage('invalid E-mail')
+    .withMessage("invalid E-mail")
     .custom(async (value) => {
       const existingUser = await User.findOne({ value });
       if (!existingUser) {
-        throw new Error('The entered E-mail is not existing ');
+        throw new Error("The entered E-mail is not existing ");
       }
     }),
-  body('password')
+  body("password")
     .isLength({ min: 5 })
-    .withMessage('must be at least 5 chars long')
-    .custom(async(value, { req }) => {
-      const existingUser = await User.findOne({email:req.body.email});
+    .withMessage("must be at least 5 chars long")
+    .custom(async (value, { req }) => {
+      const existingUser = await User.findOne({ email: req.body.email });
       const isPasswordCorrect = await bcrypt.compare(
         value,
         existingUser.password
       );
-      if(!isPasswordCorrect){
-        throw new Error(' Password is incorrect');
+      if (!isPasswordCorrect) {
+        throw new Error(" Password is incorrect");
       }
     }),
   signIn
 );
-router.get('/', protect, getUsers)
+router.get("/", protect, getUsers);
 
 export default router;
  

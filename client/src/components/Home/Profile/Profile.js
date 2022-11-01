@@ -8,7 +8,8 @@ import {
 } from "../../../assets/FramerMotionVariants/variants";
 
 const Profile = ({ showProfile, setShowProfile }) => {
-  const userInfo = useSelector((state) => state.auth.user.existingUser);
+  const userInfo = useSelector((state) => state.auth.user.user);
+  console.log(userInfo);
 
   return (
     <motion.div
@@ -25,7 +26,9 @@ const Profile = ({ showProfile, setShowProfile }) => {
           onClick={() => setShowProfile(false)}
         />
         <motion.div variants={profileItems}>
-          <div></div>
+          <img
+            src={`${userInfo.avatar.url}`}
+          />
           <p className="name">{`${userInfo.firstName} ${userInfo.lastName}`}</p>
           <p className="email">{userInfo.email}</p>
         </motion.div>

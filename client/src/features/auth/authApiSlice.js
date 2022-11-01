@@ -4,19 +4,19 @@ export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation({
       query: (formData) => ({
-        url: '/user/signup',
-        method: 'POST',
+        url: "/user/signup",
+        method: "POST",
         body: formData,
       }),
-      invalidatesTags: ['Form'],
+      invalidatesTags: ["Form"],
     }),
     signIn: builder.mutation({
       query: (formData) => ({
-        url: '/user/signin',
-        method: 'POST',
+        url: "/user/signin",
+        method: "POST",
         body: formData,
       }),
-      invalidatesTags: ['Form'],
+      invalidatesTags: ["Form"],
     }),
   }),
 });
