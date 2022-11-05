@@ -6,14 +6,14 @@ export { default as Signin } from "./Auth/Signin";
 export { default as Home } from "./Home/Home";
 export { default as SideBar } from "./Home/SideBar";
 //Home->Profile
-export { default as StatusBar } from "./Home/Profile/StatusBar";
-export { default as Profile } from "./Home/Profile/Profile";
+export { default as StatusBar } from "./Home/StatusBar";
+export { default as Profile } from "../components/Profile";
 //Home->ChatScreen
 export { default as ChatScreen } from "./Home/ChatScreen/ChatScreen";
 export { default as Sender } from "./Home/ChatScreen/Sender";
 //Home->Inbox
 export { default as Inbox } from "./Home/Inbox/Inbox";
-export { default as Card } from "./Home/Inbox/Card";
+export { default as Card } from "../components/Card";
 //Home->Inbox->Messages
 export { default as Messages } from "./Home/Inbox/Messages/Messages";
 export { default as User } from "./Home/Inbox/Messages/User";

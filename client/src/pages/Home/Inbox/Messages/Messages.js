@@ -3,7 +3,7 @@ import { Card, User } from "../../../index";
 import {
   useSearchUsersQuery,
   useFetchAllChatsQuery,
-} from "../../../../features/chat/chatApiSlice";
+} from "../../../../services/chatApiSlice";
 import searchIcon from "../../../../assets/icons/1492.gif";
 
 const Messages = () => {
@@ -56,7 +56,10 @@ const Messages = () => {
             />
           </div>
         </div>
-        <p className="accessing-chat" style={{ display: createChatStatus.loading ? "block" : "none" }}>
+        <p
+          className="accessing-chat"
+          style={{ display: createChatStatus.loading ? "block" : "none" }}
+        >
           accessing chat ...
         </p>
         <div

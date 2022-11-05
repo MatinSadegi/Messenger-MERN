@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { CreateGroupCard,Card } from "../../../index";
-import { useFetchAllChatsQuery } from "../../../../features/chat/chatApiSlice";
-
+import { CreateGroupCard, Card } from "../../../index";
+import { useFetchAllChatsQuery } from "../../../../services/chatApiSlice";
 
 const Groups = () => {
   const [createGroup, setCreateGroup] = useState(false);
   const { data, isLoading } = useFetchAllChatsQuery();
-
   return (
     <div>
       <div className="section-name">
@@ -21,7 +19,9 @@ const Groups = () => {
         {isLoading && <span className="loader"></span>}
         {data &&
           data.length > 0 &&
-          data.map((chat) => chat.isGroupChat && <Card key={chat._id} chat={chat}/>)}
+          data.map(
+            (chat) => chat.isGroupChat && <Card key={chat._id} chat={chat} />
+          )}
       </div>
       <CreateGroupCard
         createGroup={createGroup}

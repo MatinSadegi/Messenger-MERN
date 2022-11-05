@@ -1,7 +1,7 @@
-import React,{useEffect} from "react";
-import { useCreateChatMutation } from "../../../../features/chat/chatApiSlice";
+import React, { useEffect } from "react";
+import { useCreateChatMutation } from "../../../../services/chatApiSlice";
 import { useDispatch } from "react-redux";
-import { setSelectedChat } from "../../../../features/chat/chatSlice";
+import { setSelectedChat } from "../../../../redux/chatSlice";
 
 const User = ({
   firstName,
@@ -17,14 +17,10 @@ const User = ({
     const { data } = await createChat({ userId });
     dispatch(setSelectedChat(data));
     setSearch(false);
-    
   };
-  console.log(isLoading, isSuccess);
   useEffect(() => {
-    setCreateChatStatus({loading:isLoading, success:isSuccess})
-  },[isLoading])
-
-  
+    setCreateChatStatus({ loading: isLoading, success: isSuccess });
+  }, [isLoading, isSuccess]);
 
   return (
     <>
