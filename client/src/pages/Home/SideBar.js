@@ -1,6 +1,5 @@
 import React from 'react';
 import message from '../../assets/icons/message-regular.svg';
-import channel from '../../assets/icons/people-group-solid.svg';
 import group from '../../assets/icons/user-group-solid.svg';
 
 const SideBar = ({setInbox}) => {
@@ -19,13 +18,9 @@ const SideBar = ({setInbox}) => {
           <img src={message} alt='message' />
           <span>Messages</span>
         </li>
-        <li>
-          <img src={channel} alt='channel' />
-          <span>Channels</span>
-        </li>
         <li onClick={() => setInbox({ message: false, group: true })}>
           <img src={group} alt='group' />
-          <span>Group</span>
+          <span>Groups</span>
         </li>
       </ul>
     </div>

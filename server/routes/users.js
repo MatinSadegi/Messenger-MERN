@@ -4,11 +4,10 @@ import { signIn, signUp, getUsers } from "../controllers/users.js";
 import { check, body } from "express-validator";
 import { protect } from "../middleware/auth.js";
 import User from "../models/user.js";
-
 const router = express.Router();  
+//SignUp
 router.post( 
   "/signup", 
-  // upload.single("avatar"),
   body("firstName") 
     .not()
     .isEmpty()
@@ -43,15 +42,16 @@ router.post(
   }),
   signUp
 );
+//SignIn
 router.post(
   "/signin",
   check("email")
     .isEmail()
     .withMessage("invalid E-mail")
     .custom(async (value) => {
-      const existingUser = await User.findOne({ value });
+      const existingUser = await User.findOne({ email:value });
       if (!existingUser) {
-        throw new Error("The entered E-mail is not existing ");
+        throw new Error("The entered e-mail is not existing ");
       }
     }),
   body("password")
