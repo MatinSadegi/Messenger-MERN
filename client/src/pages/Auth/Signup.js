@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useSignUpMutation } from "../../features/auth/authApiSlice";
-import { setProfile } from "../../features/auth/authSlice.js";
+import { toast } from "react-toastify";
+import { useSignUpMutation } from "../../services/authApiSlice";
+import { setProfile } from "../../redux/authSlice.js";
 
 const initialState = {
   firstName: "",
@@ -13,7 +14,7 @@ const initialState = {
   confirmPassword: "",
 };
 
-const Signup = ({ setErr }) => {
+const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState(initialState);
@@ -25,16 +26,19 @@ const Signup = ({ setErr }) => {
     e.preventDefault();
     try {
       const result = await signUp(form).unwrap();
-      console.log(result);
       dispatch(setProfile(result));
       navigate("/");
     } catch (err) {
-      // const { errors } = error.data;
-      // setErr(errors);
-      console.log(err);
+      const { errors } = err.data;
+      toast.error(errors, {
+        autoClose: 4000,
+        position: "bottom-left",
+        theme: "colored",
+        pauseOnHover: false,
+      });
     }
   };
-//handle and convert it in base64
+  //handle and convert it in base64
   const handleImage = (e) => {
     const pics = e.target.files[0];
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
@@ -43,7 +47,6 @@ const Signup = ({ setErr }) => {
       data.onloadend = () => {
         setForm({ ...form, avatar: data.result });
       };
-      
     }
   };
 
