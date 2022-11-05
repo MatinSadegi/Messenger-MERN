@@ -1,20 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserProfile } from "../redux/chatSlice";
 import { motion } from "framer-motion";
 import {
   showProfileVariants,
   profile,
   profileItems,
-} from "../../../assets/FramerMotionVariants/variants";
+} from "../utils/variants";
 
 const Profile = ({ showProfile, setShowProfile }) => {
-  const userInfo = useSelector((state) => state.auth.user.user);
-  console.log(userInfo);
-
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.chat.userProfile);
+  const { show, info } = userInfo;
   return (
     <motion.div
       initial={false}
-      animate={showProfile ? "visible" : "hidden"}
+      animate={show ? "visible" : "hidden"}
       variants={showProfileVariants}
       className="profile"
     >
@@ -23,14 +24,14 @@ const Profile = ({ showProfile, setShowProfile }) => {
           variants={profileItems}
           src="https://img.icons8.com/material-rounded/20/000000/multiply--v1.png"
           alt="multiply"
-          onClick={() => setShowProfile(false)}
+          onClick={() => dispatch(setUserProfile({ info, show: false }))}
         />
         <motion.div variants={profileItems}>
-          <img
-            src={`${userInfo.avatar.url}`}
-          />
-          <p className="name">{`${userInfo.firstName} ${userInfo.lastName}`}</p>
-          <p className="email">{userInfo.email}</p>
+          <img src={`${info && info.avatar.url}`} alt="avatar" />
+          <p className="name">{`${info && info.firstName} ${
+            info && info.lastName
+          }`}</p>
+          <p className="email">{info && info.email}</p>
         </motion.div>
       </motion.div>
     </motion.div>

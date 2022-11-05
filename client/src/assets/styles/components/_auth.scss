@@ -18,6 +18,7 @@
   justify-content: center;
   align-items: center;
   color: white;
+
   .auth__form-container {
     width: 65%;
     height: 85%;
@@ -62,10 +63,10 @@
           background-color: rgb(255, 255, 255);
           color: black;
           text-align: center;
-          width: 100%
+          width: 100%;
         }
         input {
-       @extend %custom-input;
+          @extend %custom-input;
           &::placeholder {
             color: $grey;
             font-size: 0.7rem;
@@ -95,7 +96,7 @@
   }
 }
 
-@media screen and (max-width: $breackpoint-tablet) {
+@media screen and (max-width: $breakpoint-tablet) {
   .auth {
     .auth__form-container {
       width: 95%;
@@ -105,7 +106,7 @@
     }
   }
 }
-@media screen and (max-width: $breackpoint-mobile) {
+@media screen and (max-width: $breakpoint-mobile) {
   .auth {
     .auth__form-container {
       width: 100%;

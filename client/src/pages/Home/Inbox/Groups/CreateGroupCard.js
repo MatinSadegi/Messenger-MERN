@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { useSearchUsersQuery, useCreateGroupChatMutation } from "../../../../features/chat/chatApiSlice";
+import {
+  useSearchUsersQuery,
+  useCreateGroupChatMutation,
+} from "../../../../services/chatApiSlice";
 import { SearchResult } from "../../../index";
 
 const CreateGroupCard = ({ createGroup, setCreateGroup }) => {
   const [skip, setSkip] = useState(true);
   const [groupInfo, setGroupInfo] = useState({ groupName: "", users: [] });
   const [searchUser, setSearchUser] = useState("");
-  const [createGroupChat] = useCreateGroupChatMutation()
+  const [createGroupChat] = useCreateGroupChatMutation();
   const { currentData, isFetching } = useSearchUsersQuery(searchUser, {
     skip,
   });
-  const createGroupHandler = async() => {
-    const {data} = await createGroupChat(groupInfo)
-    console.log(data)
-  }
+  const createGroupHandler = async () => {
+    const { data } = await createGroupChat(groupInfo);
+    console.log(data);
+  };
   return (
     <div
       className="groupchat-builder__container"
@@ -43,8 +46,8 @@ const CreateGroupCard = ({ createGroup, setCreateGroup }) => {
             onChange={(e) => {
               setSkip(false);
               setSearchUser(e.target.value);
-              if ((e.target.value === "")) {
-                setSkip(true)
+              if (e.target.value === "") {
+                setSkip(true);
               }
             }}
           />
@@ -52,7 +55,7 @@ const CreateGroupCard = ({ createGroup, setCreateGroup }) => {
         <div className="selected-users">
           {groupInfo.users.length > 0 &&
             groupInfo.users.map((user) => (
-              <div key={user._id} >
+              <div key={user._id}>
                 <p>
                   {user.firstName} {user.lastName}
                 </p>

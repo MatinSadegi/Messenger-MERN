@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { Profile } from "../../index";
-import { showItemsVariants } from "../../../assets/FramerMotionVariants/variants.js";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Profile } from "../index";
+import { logout } from "../../redux/authSlice";
+import { setUserProfile } from "../../redux/chatSlice";
+import { showItemsVariants } from "../../utils/variants.js";
 
 const StatusBar = () => {
   const [showItems, setShowItems] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
   const userInfo = useSelector((state) => state.auth.user.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="status-bar__container">
       <div className="status-bar__top">
@@ -15,6 +19,7 @@ const StatusBar = () => {
           src={`${userInfo.avatar.url}`}
           className="profile-img"
           onClick={() => setShowItems(!showItems)}
+          alt="avatar"
         />
 
         <motion.div
@@ -25,14 +30,24 @@ const StatusBar = () => {
         >
           <motion.p
             variants={showItemsVariants}
-            onClick={() => setShowProfile(true)}
+            onClick={() =>
+              dispatch(setUserProfile({ show: true, info: userInfo }))
+            }
           >
             Edit Profile
           </motion.p>
-          <motion.p variants={showItemsVariants}>Log out</motion.p>
+          <motion.p
+            variants={showItemsVariants}
+            onClick={() => {
+              dispatch(logout());
+              navigate("/auth");
+            }}
+          >
+            Log out
+          </motion.p>
         </motion.div>
       </div>
-      <Profile setShowProfile={setShowProfile} showProfile={showProfile} />
+      <Profile />
     </div>
   );
 };

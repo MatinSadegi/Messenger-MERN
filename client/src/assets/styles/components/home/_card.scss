@@ -1,6 +1,7 @@
 @use "../../abstracts/abstracts" as *;
 .card {
   cursor: default;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.6rem;
@@ -13,50 +14,28 @@
     align-items: center;
     .card__profile-group {
       display: flex;
-      position: relative;
-      width: 4.5rem;
-      div {
-        width: 2.5rem;
-        height: 2.5rem;
+      
+      .profile-img {
+        width: 2.2rem;
+        height: 2.2rem;
         border-radius: 50%;
-        background-color: rgb(255, 208, 132);
         &:nth-child(2) {
-          background-color: rgb(136, 154, 255);
-          position: absolute;
-          left: 1rem;
+          margin-left: -1.5rem;
         }
         &:nth-child(3) {
-          background-color: rgb(255, 165, 249);
-          position: absolute;
-          left: 2rem;
+          margin-left: -1.5rem;
         }
       }
     }
-    .card__profile-user {
-      position: relative;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      background-color: rgb(235, 173, 72);
-      &::after {
-        content: "";
-        width: 0.5rem;
-        height: 0.5rem;
-        border: 1px solid $slate-100;
-        border-radius: 50%;
-        background-color: $lime-green;
-        position: absolute;
-        right: 0.2rem;
-        bottom: 0;
-      }
-    }
+
     .card__info {
-      margin-left: 0.7rem;
+      margin-left: 0.6rem;
       p {
-        font-weight: 300;
+        font-size: 0.7rem;
         &:first-child {
           font-size: 0.8rem;
           font-weight: 500;
+          text-transform: capitalize;
         }
       }
     }

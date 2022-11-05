@@ -1,6 +1,6 @@
 import './assets/styles/App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom';
-import {Home, Auth} from './components';
+import {Home, Auth} from './pages';
 
 
 function App() {

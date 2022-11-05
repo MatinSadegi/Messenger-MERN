@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Sender } from "../../index";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
-import { setReceivedMessages } from "../../../features/message/messageSlice";
+import { setReceivedMessages } from "../../../redux/messageSlice";
+import { setUserProfile } from "../../../redux/chatSlice";
 import {
   useFetchAllMessageQuery,
   useSendMessageMutation,
-} from "../../../features/message/messageApiSlice";
+} from "../../../services/messageApiSlice";
 let socket, selectedChatCompare;
 const ChatScreen = () => {
   const dispatch = useDispatch();
@@ -17,11 +18,13 @@ const ChatScreen = () => {
   const [skip, setSkip] = useState(true);
   const [newMessage, setNewMessage] = useState("");
   const [sendMessage] = useSendMessageMutation();
-  const { isFetching, currentData, isSuccess} =
-    useFetchAllMessageQuery(currentChat && currentChat._id, {
+  const { isFetching, currentData, isSuccess } = useFetchAllMessageQuery(
+    currentChat && currentChat._id,
+    {
       skip,
       refetchOnMountOrArgChange: true,
-    });
+    }
+  );
 
   useEffect(() => {
     socket = io("http://localhost:5000");
@@ -36,18 +39,20 @@ const ChatScreen = () => {
       }
       socket.emit("join chat", currentChat._id);
     }
-    selectedChatCompare= currentChat
+    selectedChatCompare = currentChat;
   }, [currentChat, currentData]);
 
   useEffect(() => {
     socket.on("message received", (newMessageReceived) => {
-
-        if (!selectedChatCompare || newMessageReceived.chatId._id !== selectedChatCompare._id ) {
-          dispatch(setReceivedMessages(newMessageReceived));
-        } else {
-          setMessages([...messages, newMessageReceived]);
-          console.log(newMessageReceived);
-        }
+      if (
+        !selectedChatCompare ||
+        newMessageReceived.chatId._id !== selectedChatCompare._id
+      ) {
+        dispatch(setReceivedMessages(newMessageReceived));
+      } else {
+        setMessages([...messages, newMessageReceived]);
+        console.log(newMessageReceived);
+      }
     });
   });
   const sendMessageHandler = async (e) => {
@@ -75,15 +80,22 @@ const ChatScreen = () => {
         <div className="chat-screen">
           <div className="chat-screen__header">
             <div className="chat-screen__left">
-              {currentChat.isGroupChat ? (
-                <div className="card__profile-group">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-              ) : (
-                <div className="card__profile-user"></div>
-              )}
+              <div className="card__profile-group">
+                {currentChat.users.map((user) => {
+                  if (user._id !== signedUser._id) {
+                    return (
+                      <img
+                        key={user._id}
+                        className="profile-img"
+                        src={`${user.avatar.url}`}
+                        onClick={() =>
+                          dispatch(setUserProfile({ info: user, show: true }))
+                        }
+                      />
+                    );
+                  }
+                })}
+              </div>
               <div className="card__info">
                 <p>
                   {currentChat.isGroupChat

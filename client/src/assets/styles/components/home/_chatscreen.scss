@@ -1,21 +1,37 @@
 @use "../../abstracts/abstracts" as *;
-@mixin message($br: 1rem 1rem 0 1rem, $bc: DodgerBlue, $fd:row, $margin:0 0 0 0.4rem) {
+@mixin message(
+  $br: 0.5rem 0.5rem 0 0.5rem,
+  $bc: $sky-500,
+  $color: white,
+  $fd: row,
+  $margin: 0 0 0 0.3rem,
+
+) {
   position: relative;
-  margin-bottom: 0.5rem;
-  padding: 0 0.5rem;
-  border-radius: $br;
-  font-weight: 300;
-  font-size: 0.8rem;
-  color: white;
-  background-color: $bc;
+  margin: $margin;
+  display: flex;
+  flex-direction: $fd;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    margin: $margin;
+  }
   p {
     display: flex;
     align-items: center;
-    padding: 0.4rem 0;
-    flex-direction: $fd;
+    padding: 0.5rem;
+    border-radius: $br;
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: $color;
+    background-color: $bc;
     span {
       font-size: 0.5rem;
-      margin: $margin;
+      margin-left: 0.4rem;
       align-self: flex-end;
       transform: translateY(5px);
     }
@@ -52,45 +68,32 @@
         align-items: center;
         .card__profile-group {
           display: flex;
-          position: relative;
-          width: 4.5rem;
-          div {
+          .profile-img {
             width: 2.5rem;
             height: 2.5rem;
             border-radius: 50%;
-            background-color: rgb(255, 208, 132);
             &:nth-child(2) {
-              background-color: rgb(136, 154, 255);
-              position: absolute;
-              left: 1rem;
+              margin-left: -1.5rem;
             }
             &:nth-child(3) {
-              background-color: rgb(255, 165, 249);
-              position: absolute;
-              left: 2rem;
+              margin-left: -1.5rem;
             }
           }
         }
-        .card__profile-user {
-          position: relative;
-          width: 2.5rem;
-          height: 2.5rem;
-          border-radius: 50%;
-          background-color: rgb(235, 173, 72);
-          &::after {
-            content: "";
-            width: 0.5rem;
-            height: 0.5rem;
-            border: 1px solid $slate-100;
-            border-radius: 50%;
-            background-color: $lime-green;
-            position: absolute;
-            right: 0.2rem;
-            bottom: 0;
-          }
-        }
+
+        //   &::after {
+        //     content: "";
+        //     width: 0.5rem;
+        //     height: 0.5rem;
+        //     border: 1px solid $slate-100;
+        //     border-radius: 50%;
+        //     background-color: $lime-green;
+        //     position: absolute;
+        //     right: 0.2rem;
+        //     bottom: 0;
+        //   }
         .card__info {
-          margin-left: 0.7rem;
+          margin-left: 0.6rem;
           p {
             font-weight: 300;
             font-size: 0.6rem;
@@ -170,11 +173,17 @@
         //   color: white;
         //   background-color: red;
         // }
-        .message__send{
-          @include message
+        .message__send {
+          @include message;
         }
-        .message__receive{
-          @include message($br:1rem 1rem 1rem 0, $bc:red, $fd:row-reverse, $margin:0 0.4rem 0 0 )
+        .message__receive {
+          @include message(
+            $br: 0.5rem 0.5rem 0.5rem 0,
+            $bc: $slate-200,
+            $color: black,
+            $fd: row-reverse,
+            $margin: 0 0.3rem 0 0,
+          );
         }
       }
     }

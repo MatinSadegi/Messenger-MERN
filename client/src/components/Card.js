@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedChat } from "../../../features/chat/chatSlice";
+import { setSelectedChat } from "../redux/chatSlice";
 import moment from "moment";
 
 const Card = ({ chat }) => {
   const dispatch = useDispatch();
-  const signedUser = useSelector((state) => state.auth.user.existingUser);
+  const signedUser = useSelector((state) => state.auth.user.user);
   const newMessages = useSelector((state) => state.message.receivedMessages);
   const [notification, setNotification] = useState(0);
   const lastMessageTime = chat.latestMessage && chat.latestMessage.updatedAt;
@@ -17,8 +17,6 @@ const Card = ({ chat }) => {
     });
   }, [newMessages]);
 
-  
-
   return (
     <div
       className="card"
@@ -26,18 +24,22 @@ const Card = ({ chat }) => {
         dispatch(setSelectedChat(chat));
         setNotification(0);
       }}
-      style={{ display: chat.latestMessage ? "flex" : "none" }}
+      // style={{ display: chat.latestMessage ? "flex" : "none" }}
     >
       <div className="card__left">
-        {chat.isGroupChat ? (
-          <div className="card__profile-group">
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        ) : (
-          <div className="card__profile-user"></div>
-        )}
+        <div className="card__profile-group">
+          {chat.users.map((user) => {
+            if (user._id !== signedUser._id) {
+              return (
+                <img
+                  key={user._id}
+                  className="profile-img"
+                  src={`${user.avatar.url}`}
+                />
+              );
+            }
+          })}
+        </div>
         <div className="card__info">
           {chat.isGroupChat ? (
             <p>{chat.chatName}</p>
@@ -52,8 +54,10 @@ const Card = ({ chat }) => {
           )}
           <p>
             {chat.latestMessage && chat.latestMessage.content.length > 40
-              ? `${chat.latestMessage.content.substring(0, 41)}"..."`
-              : chat.latestMessage.content}
+              ? `${chat.latestMessage.content.substring(0, 21)}"..."`
+              : chat.latestMessage && chat.latestMessage.content.length < 40
+              ? chat.latestMessage.content
+              : "No message ..! "}
           </p>
         </div>
       </div>

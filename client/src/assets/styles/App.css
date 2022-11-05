@@ -171,7 +171,6 @@
   height: 3rem;
   border-radius: 50%;
   padding: 0;
-  object-fit: cover;
 }
 .status-bar__container .status-bar__top .items {
   width: 100%;
@@ -200,6 +199,7 @@
 
 .card {
   cursor: default;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.6rem;
@@ -214,52 +214,28 @@
 }
 .card .card__left .card__profile-group {
   display: flex;
-  position: relative;
-  width: 4.5rem;
 }
-.card .card__left .card__profile-group div {
-  width: 2.5rem;
-  height: 2.5rem;
+.card .card__left .card__profile-group .profile-img {
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 50%;
-  background-color: rgb(255, 208, 132);
 }
-.card .card__left .card__profile-group div:nth-child(2) {
-  background-color: rgb(136, 154, 255);
-  position: absolute;
-  left: 1rem;
+.card .card__left .card__profile-group .profile-img:nth-child(2) {
+  margin-left: -1.5rem;
 }
-.card .card__left .card__profile-group div:nth-child(3) {
-  background-color: rgb(255, 165, 249);
-  position: absolute;
-  left: 2rem;
-}
-.card .card__left .card__profile-user {
-  position: relative;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: rgb(235, 173, 72);
-}
-.card .card__left .card__profile-user::after {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  border: 1px solid #f1f5f9;
-  border-radius: 50%;
-  background-color: #32cd32;
-  position: absolute;
-  right: 0.2rem;
-  bottom: 0;
+.card .card__left .card__profile-group .profile-img:nth-child(3) {
+  margin-left: -1.5rem;
 }
 .card .card__left .card__info {
-  margin-left: 0.7rem;
+  margin-left: 0.6rem;
 }
 .card .card__left .card__info p {
-  font-weight: 300;
+  font-size: 0.7rem;
 }
 .card .card__left .card__info p:first-child {
   font-size: 0.8rem;
   font-weight: 500;
+  text-transform: capitalize;
 }
 .card .card__status {
   font-weight: 600;
@@ -279,12 +255,13 @@
 }
 
 .groupchat-builder__container {
+  position: absolute;
   width: 100vw;
   height: 100vh;
+  z-index: 10;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
 }
 .groupchat-builder__container .groupchat-builder {
   position: absolute;
@@ -507,45 +484,20 @@
 }
 .chat-screen__container .chat-screen__header .chat-screen__left .card__profile-group {
   display: flex;
-  position: relative;
-  width: 4.5rem;
 }
-.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-group div {
+.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-group .profile-img {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background-color: rgb(255, 208, 132);
 }
-.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-group div:nth-child(2) {
-  background-color: rgb(136, 154, 255);
-  position: absolute;
-  left: 1rem;
+.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-group .profile-img:nth-child(2) {
+  margin-left: -1.5rem;
 }
-.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-group div:nth-child(3) {
-  background-color: rgb(255, 165, 249);
-  position: absolute;
-  left: 2rem;
-}
-.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-user {
-  position: relative;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: rgb(235, 173, 72);
-}
-.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-user::after {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  border: 1px solid #f1f5f9;
-  border-radius: 50%;
-  background-color: #32cd32;
-  position: absolute;
-  right: 0.2rem;
-  bottom: 0;
+.chat-screen__container .chat-screen__header .chat-screen__left .card__profile-group .profile-img:nth-child(3) {
+  margin-left: -1.5rem;
 }
 .chat-screen__container .chat-screen__header .chat-screen__left .card__info {
-  margin-left: 0.7rem;
+  margin-left: 0.6rem;
 }
 .chat-screen__container .chat-screen__header .chat-screen__left .card__info p {
   font-weight: 300;
@@ -594,45 +546,63 @@
 }
 .chat-screen__container .chat-screen__main .message__container .message__send {
   position: relative;
-  margin-bottom: 0.5rem;
-  padding: 0 0.5rem;
-  border-radius: 1rem 1rem 0 1rem;
-  font-weight: 300;
-  font-size: 0.8rem;
-  color: white;
-  background-color: DodgerBlue;
+  margin: 0 0 0 0.3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+}
+.chat-screen__container .chat-screen__main .message__container .message__send img {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  margin: 0 0 0 0.3rem;
 }
 .chat-screen__container .chat-screen__main .message__container .message__send p {
   display: flex;
   align-items: center;
-  padding: 0.4rem 0;
-  flex-direction: row;
+  padding: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0.5rem;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: white;
+  background-color: #3ca9ed;
 }
 .chat-screen__container .chat-screen__main .message__container .message__send p span {
   font-size: 0.5rem;
-  margin: 0 0 0 0.4rem;
+  margin-left: 0.4rem;
   align-self: flex-end;
   transform: translateY(5px);
 }
 .chat-screen__container .chat-screen__main .message__container .message__receive {
   position: relative;
-  margin-bottom: 0.5rem;
-  padding: 0 0.5rem;
-  border-radius: 1rem 1rem 1rem 0;
-  font-weight: 300;
-  font-size: 0.8rem;
-  color: white;
-  background-color: red;
+  margin: 0 0.3rem 0 0;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+}
+.chat-screen__container .chat-screen__main .message__container .message__receive img {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  margin: 0 0.3rem 0 0;
 }
 .chat-screen__container .chat-screen__main .message__container .message__receive p {
   display: flex;
   align-items: center;
-  padding: 0.4rem 0;
-  flex-direction: row-reverse;
+  padding: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0.5rem 0;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: black;
+  background-color: #e2e8f0;
 }
 .chat-screen__container .chat-screen__main .message__container .message__receive p span {
   font-size: 0.5rem;
-  margin: 0 0.4rem 0 0;
+  margin-left: 0.4rem;
   align-self: flex-end;
   transform: translateY(5px);
 }
