@@ -9,8 +9,12 @@ export const authSlice = createSlice({
         setProfile:(state,action) => {
             state.user = action?.payload
             localStorage.setItem("profile", JSON.stringify(action?.payload));
+        },
+        logout:(state) => {
+            localStorage.clear();
+            state.user = null
         }
     }
 })
-export const {setProfile} = authSlice.actions;
+export const {setProfile, logout} = authSlice.actions;
 export default authSlice.reducer;
