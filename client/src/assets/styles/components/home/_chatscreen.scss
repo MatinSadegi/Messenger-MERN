@@ -121,6 +121,26 @@
       padding: 1rem;
       display: flex;
       flex-direction: column-reverse;
+      .typing__container{
+         width: fit-content;
+
+
+        p{
+          font-size: 0.8rem;
+          align-items: center;
+          span{
+            font-size: 2rem;
+            display: inline-block;
+            &:first-child{
+              font-size: 0.8rem;
+              color: rgb(139, 16, 167);
+            }
+            &:nth-child(2){
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
       .loader__container {
         width: 100%;
         height: 100%;

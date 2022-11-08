@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Sender } from "../../index";
+import { Sender, Header, Typing } from "../../index";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { setReceivedMessages } from "../../../redux/messageSlice";
-import { setUserProfile } from "../../../redux/chatSlice";
 import {
   useFetchAllMessageQuery,
   useSendMessageMutation,
@@ -17,6 +16,7 @@ const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [skip, setSkip] = useState(true);
   const [newMessage, setNewMessage] = useState("");
+  const [isTyping, setIsTyping] = useState({typing:false , name:""});
   const [sendMessage] = useSendMessageMutation();
   const { isFetching, currentData, isSuccess } = useFetchAllMessageQuery(
     currentChat && currentChat._id,
@@ -25,10 +25,11 @@ const ChatScreen = () => {
       refetchOnMountOrArgChange: true,
     }
   );
-
   useEffect(() => {
     socket = io("http://localhost:5000");
     socket.emit("setup", signedUser);
+    socket.on("typing", (name) => setIsTyping({typing:true , name}));
+    socket.on("stop typing", () => setIsTyping({typing:false , name:""}));
     socket.on("connected", () => setSocketConnected(true));
   }, []);
   useEffect(() => {
@@ -36,10 +37,12 @@ const ChatScreen = () => {
       setSkip(false);
       if (isSuccess && currentData) {
         setMessages(currentData);
+        socket.emit("join chat", currentChat._id);
+        selectedChatCompare = currentChat;
       }
-      socket.emit("join chat", currentChat._id);
+    }else{
+      socket.emit("stop typing");
     }
-    selectedChatCompare = currentChat;
   }, [currentChat, currentData]);
 
   useEffect(() => {
@@ -51,12 +54,12 @@ const ChatScreen = () => {
         dispatch(setReceivedMessages(newMessageReceived));
       } else {
         setMessages([...messages, newMessageReceived]);
-        console.log(newMessageReceived);
       }
     });
   });
   const sendMessageHandler = async (e) => {
-    if (e.key === "Enter" && newMessage.trim()) {
+    if (e.key === "Enter" || e.target.alt ==="send") {
+      socket.emit('stop typing')
       setNewMessage("");
       const { data } = await sendMessage({
         content: newMessage,
@@ -68,6 +71,7 @@ const ChatScreen = () => {
   };
   const typeHandler = (e) => {
     setNewMessage(e.target.value);
+
   };
 
   return (
@@ -78,62 +82,14 @@ const ChatScreen = () => {
         </div>
       ) : (
         <div className="chat-screen">
-          <div className="chat-screen__header">
-            <div className="chat-screen__left">
-              <div className="card__profile-group">
-                {currentChat.users.map((user) => {
-                  if (user._id !== signedUser._id) {
-                    return (
-                      <img
-                        key={user._id}
-                        className="profile-img"
-                        src={`${user.avatar.url}`}
-                        onClick={() =>
-                          dispatch(setUserProfile({ info: user, show: true }))
-                        }
-                      />
-                    );
-                  }
-                })}
-              </div>
-              <div className="card__info">
-                <p>
-                  {currentChat.isGroupChat
-                    ? currentChat.chatName
-                    : currentChat.users.map((user) => {
-                        if (user._id !== signedUser._id) {
-                          return `${user.firstName} ${user.lastName}`;
-                        }
-                      })}
-                </p>
-                <p>
-                  {currentChat.isGroupChat
-                    ? `${currentChat.users.length} Members`
-                    : "Online"}
-                </p>
-              </div>
-            </div>
-            <div className="chat-screen__right">
-              <img
-                src="https://img.icons8.com/fluency-systems-regular/18/A9A9A9/microphone--v1.png"
-                alt="voice"
-              />
-              <img
-                src="https://img.icons8.com/fluency-systems-filled/18/A9A9A9/phone.png"
-                alt="phone"
-              />
-              <img
-                src="https://img.icons8.com/material-outlined/18/A9A9A9/video-call.png"
-                alt="video-call"
-              />
-            </div>
-          </div>
+          <Header currentChat={currentChat} signedUser={signedUser} />
           <div className="chat-screen__main">
             {isFetching && (
               <div className="loader__container">
                 <span className="loader"></span>
               </div>
             )}
+            {isTyping.typing ? <Typing currentChat={currentChat} name={isTyping.name} /> :""}
             {messages &&
               !isFetching &&
               [...messages].reverse().map((message) => {
@@ -148,10 +104,13 @@ const ChatScreen = () => {
               placeholder="Write a message..."
               value={newMessage}
               onChange={typeHandler}
+              onFocus={() => socket.emit("typing", signedUser.firstName)}
+              onBlur={() => socket.emit("stop typing")}
             />
             <img
               src="https://img.icons8.com/external-anggara-basic-outline-anggara-putra/20/ffffff/external-send-email-interface-anggara-basic-outline-anggara-putra.png"
               alt="send"
+              onClick={sendMessageHandler}
             />
           </div>
         </div>

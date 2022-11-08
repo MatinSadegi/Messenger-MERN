@@ -6,7 +6,6 @@ const Sender = ({ message }) => {
   const signedUser = useSelector((state) => state.auth.user);
   const { sender, content, createdAt } = message;
   const sendTime = moment(createdAt).format("LT");
-  console.log(message.chatId)
   return (
     <div
       className="message__container"

@@ -522,6 +522,24 @@
   display: flex;
   flex-direction: column-reverse;
 }
+.chat-screen__container .chat-screen__main .typing__container {
+  width: fit-content;
+}
+.chat-screen__container .chat-screen__main .typing__container p {
+  font-size: 0.8rem;
+  align-items: center;
+}
+.chat-screen__container .chat-screen__main .typing__container p span {
+  font-size: 2rem;
+  display: inline-block;
+}
+.chat-screen__container .chat-screen__main .typing__container p span:first-child {
+  font-size: 0.8rem;
+  color: rgb(139, 16, 167);
+}
+.chat-screen__container .chat-screen__main .typing__container p span:nth-child(2) {
+  font-size: 0.8rem;
+}
 .chat-screen__container .chat-screen__main .loader__container {
   width: 100%;
   height: 100%;

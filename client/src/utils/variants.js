@@ -1,3 +1,4 @@
+
 export const showItemsVariants = {
   open: {
     opacity: 1,
@@ -24,7 +25,6 @@ export const showItemsVariants = {
 export const showProfileVariants = {
   visible: {
     display: "block",
-    
   },
   hidden: {
     display: "none",
@@ -61,4 +61,25 @@ export const profileItems = {
   hidden: {
     opacity: 0,
   },
+};
+
+export const parentTyping = {
+  on: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+export const typing = {
+  on: {
+    display: "inline-block",
+    y: [0,-3,0],
+    transition: {
+      duration: 0.6,
+      repeat: Infinity,
+      type: "spring",
+    },
+  },
+
 };
