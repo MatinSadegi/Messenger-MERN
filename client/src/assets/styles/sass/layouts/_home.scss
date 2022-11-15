@@ -1,0 +1,28 @@
+@use "../components/sidebar";
+@use "../components/statusbar";
+@use "../components/inbox";
+@use "../components/chatscreen";
+@use "../components/profile";
+@use "../abstracts/abstracts" as *;
+@use "../mixins/media-query" as *;
+.home {
+  display: grid;
+  grid-template-columns: 150px 3fr 8fr 90px;
+  max-height: 100vh;
+  @include for-desktop {
+    grid-template-columns: 150px 4fr 8fr 90px;
+  }
+  @include for-laptop {
+    grid-template-columns: 150px 8fr 90px;
+  }
+  @include for-tablet {
+    grid-template-columns: 150px 1fr;
+  }
+  @include for-mobile {
+    width: 100vw;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+  }
+}

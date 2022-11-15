@@ -1,5 +1,5 @@
-@use './components/auth';
-@use './components/home/home';
+@use './layouts/auth';
+@use './layouts/home';
 @use './abstracts/abstracts' as *;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&family=Raleway:wght@200;400;600&display=swap');
 * {

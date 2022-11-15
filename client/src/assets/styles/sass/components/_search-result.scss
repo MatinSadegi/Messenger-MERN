@@ -1,4 +1,5 @@
-@use "../../abstracts/abstracts" as *;
+@use "../abstracts/abstracts" as *;
+@use '../mixins/media-query' as*;
 .result {
   width: 100%;
   > img {

@@ -1,8 +1,12 @@
-@use "../../abstracts/abstracts" as *;
+@use "../abstracts/abstracts" as *;
+@use "../mixins/media-query" as *;
 .status-bar__container {
   border-left: 1px solid $slate-100;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   overflow: hidden;
+  @include for-tablet{
+    display: none;
+  }
   .status-bar__top {
     width: 100%;
     display: flex;
@@ -41,3 +45,4 @@
     gap: 0.6rem;
   }
 }
+

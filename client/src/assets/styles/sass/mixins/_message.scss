@@ -1,0 +1,39 @@
+@use "../abstracts/abstracts" as *;
+@mixin message(
+  $br: 0.5rem 0.5rem 0 0.5rem,
+  $bc: $sky-500,
+  $color: white,
+  $fd: row,
+  $margin: 0 0 0 0.3rem,
+
+) {
+  position: relative;
+  margin: $margin;
+  display: flex;
+  flex-direction: $fd;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    margin: $margin;
+  }
+  p {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: $br;
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: $color;
+    background-color: $bc;
+    span {
+      font-size: 0.5rem;
+      margin-left: 0.4rem;
+      align-self: flex-end;
+      transform: translateY(5px);
+    }
+  }
+}

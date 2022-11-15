@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedChat } from "../redux/chatSlice";
+import { setSelectedChat,setShowInbox } from "../redux/chatSlice";
 import moment from "moment";
 
 const Card = ({ chat }) => {
@@ -22,6 +22,7 @@ const Card = ({ chat }) => {
       className="card"
       onClick={() => {
         dispatch(setSelectedChat(chat));
+        dispatch(setShowInbox(false));
         setNotification(0);
       }}
       // style={{ display: chat.latestMessage ? "flex" : "none" }}

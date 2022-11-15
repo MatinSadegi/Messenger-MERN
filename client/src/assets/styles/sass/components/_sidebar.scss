@@ -1,0 +1,95 @@
+@use "../abstracts/abstracts" as *;
+@use "../mixins/media-query" as *;
+.side-bar {
+  position: relative;
+  &__container {
+    position: relative;
+    z-index: 50;
+    background: linear-gradient(to right, #e6ebff, #f6f6f6);
+    padding: 10px 0 0 10px;
+    height: 100vh;
+    @include for-mobile {
+      width: 11rem;
+    }
+    .logo__div {
+      display: flex;
+      align-items: center;
+      p {
+        font-family: $relway;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+    }
+    ul {
+      margin: 2.5rem 0 0 10px;
+      li {
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0 0.5rem 0.5rem;
+        border-right: 3px solid transparent;
+        border-radius: 0.2rem;
+        transition: all 200ms ease-in;
+        cursor: pointer;
+        img {
+          width: 18px;
+          filter: brightness(100);
+        }
+        &:hover {
+          border-right: 3px solid orange;
+          background-color: white;
+          color: $DodgerBlue;
+        }
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+    > img {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      z-index: 20;
+      display: none;
+      @include for-laptop {
+        display: block;
+      }
+      @include for-mobile {
+        display: none;
+      }
+    }
+    .setting{
+      display: none;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      >button{
+        width: 50%;
+        border: none;
+        padding: 0.5rem 0;
+        background: linear-gradient(to right, #86dafc, #73b0ff);
+        color: white;
+        &:first-child{
+         background: linear-gradient(to left, #86dafc, #73b0ff);
+        }
+      }
+      @include for-laptop{
+        display: block;
+      }
+    }
+  }
+  .dark-background {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.35);
+    @include for-mobile {
+      display: flex;
+      z-index: 30;
+    }
+  }
+}

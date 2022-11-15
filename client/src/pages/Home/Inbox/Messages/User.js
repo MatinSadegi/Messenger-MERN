@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+
 import { useCreateChatMutation } from "../../../../services/chatApiSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectedChat } from "../../../../redux/chatSlice";
 
 const User = ({

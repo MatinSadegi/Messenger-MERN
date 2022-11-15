@@ -8,7 +8,7 @@ import {
   profileItems,
 } from "../utils/variants";
 
-const Profile = ({ showProfile, setShowProfile }) => {
+const Profile = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.chat.userProfile);
   const { show, info } = userInfo;

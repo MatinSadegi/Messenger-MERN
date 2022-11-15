@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { Inbox, StatusBar, SideBar, ChatScreen } from "../";
-
+import { Inbox, StatusBar, SideBar, ChatScreen, Profile } from "../";
 
 const Home = () => {
-  const [inbox, setInbox] = useState({ message: true, group: false });
+  const [inbox, setInbox] = useState("Messages");
+  const [showSideBar, setShowSideBar] = useState(false);
 
   return (
     <div className="home">
-      <SideBar setInbox={setInbox} />
-      <Inbox inbox={inbox}/>
-      <ChatScreen  />
+      <SideBar
+        setInbox={setInbox}
+        setShowSideBar={setShowSideBar}
+        showSideBar={showSideBar}
+      />
+      <Inbox inbox={inbox} setShowSideBar={setShowSideBar} />
+      <ChatScreen />
       <StatusBar />
+      <Profile />
     </div>
   );
 };

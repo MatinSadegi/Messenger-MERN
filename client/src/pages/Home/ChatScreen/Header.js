@@ -1,12 +1,17 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setUserProfile } from '../../../redux/chatSlice';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { setUserProfile,setShowInbox } from "../../../redux/chatSlice";
 
 const Header = ({ currentChat, signedUser }) => {
   const dispatch = useDispatch();
   return (
     <div className="chat-screen__header">
       <div className="chat-screen__left">
+        <img
+          src="https://img.icons8.com/fluency-systems-filled/18/A9A9A9/long-arrow-left.png"
+          alt="arrow-left"
+          onClick={() => dispatch(setShowInbox(true))}
+        />
         <div className="card__profile-group">
           {currentChat.users.map((user) => {
             if (user._id !== signedUser._id) {
@@ -18,6 +23,7 @@ const Header = ({ currentChat, signedUser }) => {
                   onClick={() =>
                     dispatch(setUserProfile({ info: user, show: true }))
                   }
+                  alt="user-profile"
                 />
               );
             }
@@ -49,13 +55,9 @@ const Header = ({ currentChat, signedUser }) => {
           src="https://img.icons8.com/fluency-systems-filled/18/A9A9A9/phone.png"
           alt="phone"
         />
-        <img
-          src="https://img.icons8.com/material-outlined/18/A9A9A9/video-call.png"
-          alt="video-call"
-        />
       </div>
     </div>
   );
 };
 
-export default Header
+export default Header;

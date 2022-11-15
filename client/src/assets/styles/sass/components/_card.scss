@@ -1,4 +1,4 @@
-@use "../../abstracts/abstracts" as *;
+@use "../abstracts/abstracts" as *;
 .card {
   cursor: default;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
   font-size: 0.6rem;
   padding: 0.8rem;
-  background-color: $slate-100;
+  background: linear-gradient(to right, #e6ebff, #f6f6f6);
   border-radius: 10px;
   margin-top: 0.2rem;
   .card__left {

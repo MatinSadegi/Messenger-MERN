@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Profile } from "../index";
 import { logout } from "../../redux/authSlice";
 import { setUserProfile } from "../../redux/chatSlice";
 import { showItemsVariants } from "../../utils/variants.js";
@@ -47,7 +46,6 @@ const StatusBar = () => {
           </motion.p>
         </motion.div>
       </div>
-      <Profile />
     </div>
   );
 };

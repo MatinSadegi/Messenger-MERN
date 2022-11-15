@@ -4,10 +4,10 @@ import {
   useSearchUsersQuery,
   useFetchAllChatsQuery,
 } from "../../../../services/chatApiSlice";
+
 import searchIcon from "../../../../assets/icons/1492.gif";
 
-const Messages = () => {
-  const [search, setSearch] = useState(false);
+const Messages = ({search,setSearch}) => {
   const [skip, setSkip] = useState(true);
   const [searchUser, setSearchUser] = useState("");
   const { data, isLoading } = useFetchAllChatsQuery();
@@ -21,21 +21,13 @@ const Messages = () => {
       skip,
     }
   );
-
   const findUser = () => {
     setSkip(false);
   };
 
   return (
     <div>
-      <div className="section-name">
-        <h3>Messages</h3>
-        <img
-          src="https://img.icons8.com/small/10/000000/plus-math.png"
-          alt="plus"
-          onClick={() => setSearch(!search)}
-        />
-      </div>
+      
       <div
         className="search__container"
         style={{ display: search ? "block" : "none" }}
@@ -102,4 +94,3 @@ const Messages = () => {
 
 export default Messages;
 
-//: isSuccess && data && !data.length ? ('not foundddd')

@@ -1,4 +1,4 @@
-@use "../../abstracts/abstracts" as *;
+@use "../abstracts/abstracts" as *;
 
 .profile {
   position: absolute;
@@ -7,6 +7,7 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 100;
   &__container {
     position: absolute;
     width: 26rem;
