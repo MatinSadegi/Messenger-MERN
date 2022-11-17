@@ -4,7 +4,6 @@ import {
   useSearchUsersQuery,
   useFetchAllChatsQuery,
 } from "../../../../services/chatApiSlice";
-
 import searchIcon from "../../../../assets/icons/1492.gif";
 
 const Messages = ({search,setSearch}) => {
@@ -26,30 +25,27 @@ const Messages = ({search,setSearch}) => {
   };
 
   return (
-    <div>
-      
-      <div
-        className="search__container"
-        style={{ display: search ? "block" : "none" }}
-      >
-        <div className="search_div">
+    <div className="messages" style={{ display: search ? "block" : "none" }}>
+      <div className="search">
+        <div className="search__container">
           <input
             type="text"
             placeholder="search user"
+            className="search__input"
             onChange={(e) => {
               setSearchUser(e.target.value);
               setSkip(true);
             }}
           />
-          <div onClick={findUser}>
-            <img
-              src="https://img.icons8.com/fluency-systems-regular/18/A9A9A9/search--v1.png"
-              alt="search"
-            />
-          </div>
+          <img
+            src="https://img.icons8.com/fluency-systems-regular/18/A9A9A9/search--v1.png"
+            alt="search"
+            className="search__icon"
+            onClick={findUser}
+          />
         </div>
         <p
-          className="accessing-chat"
+          className="search__accessing-chat"
           style={{ display: createChatStatus.loading ? "block" : "none" }}
         >
           accessing chat ...
@@ -63,30 +59,16 @@ const Messages = ({search,setSearch}) => {
           ) : isSuccess && currentData && !currentData.length ? (
             <p>User Not Found !</p>
           ) : isSuccess && currentData ? (
-            currentData.map((item) => (
+            currentData.map((user) => (
               <User
-                firstName={item.firstName}
-                lastName={item.lastName}
-                email={item.email}
-                userId={item._id}
-                key={item.email}
+                user={user}
+                key={user.email}
                 setSearch={setSearch}
                 setCreateChatStatus={setCreateChatStatus}
               />
             ))
           ) : null}
         </div>
-      </div>
-      <div
-        className="unreaded__container"
-        style={{ display: search ? "none" : "block" }}
-      >
-        {isLoading && <span className="loader"></span>}
-        {data &&
-          data.length > 0 &&
-          data.map(
-            (chat) => !chat.isGroupChat && <Card key={chat._id} chat={chat} />
-          )}
       </div>
     </div>
   );

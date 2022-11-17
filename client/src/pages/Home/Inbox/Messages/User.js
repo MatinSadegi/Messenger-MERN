@@ -5,13 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectedChat } from "../../../../redux/chatSlice";
 
 const User = ({
-  firstName,
-  lastName,
-  email,
-  userId,
+  user,
   setSearch,
   setCreateChatStatus,
 }) => {
+  const {firstName, lastName, userId, email} = user
   const dispatch = useDispatch();
   const [createChat, { isLoading, isSuccess }] = useCreateChatMutation();
   const accessChat = async () => {
@@ -25,8 +23,8 @@ const User = ({
 
   return (
     <>
-      <div onClick={accessChat} className="user__container">
-        <div className="user__profile"></div>
+      <div onClick={accessChat} className="user">
+        <img className="user__profile" src={`${user.avatar.url}`} alt='user-profile'/>
         <div className="user__info">
           <p className="user__name">
             {firstName} {lastName}

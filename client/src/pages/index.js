@@ -17,10 +17,10 @@ export { default as Sender } from "./Home/ChatScreen/Sender";
 export { default as Header } from "./Home/ChatScreen/Header";
 //Home->Inbox
 export { default as Inbox } from "./Home/Inbox/Inbox";
+export { default as UnreadMessages } from "./Home/Inbox/UnreadMessages";
 //Home->Inbox->Messages
 export { default as Messages } from "./Home/Inbox/Messages/Messages";
 export { default as User } from "./Home/Inbox/Messages/User";
 //Home->Inbox->Groups
-export { default as Groups } from "./Home/Inbox/Groups/Groups";
 export { default as SearchResult } from "./Home/Inbox/Groups/SearchResult";
 export { default as CreateGroupCard } from "./Home/Inbox/Groups/CreateGroupCard";

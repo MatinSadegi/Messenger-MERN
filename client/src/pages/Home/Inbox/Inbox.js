@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
+import { Messages, CreateGroupCard, UnreadMessages } from "../..";
 import { useForMobile } from "../../../utils/mediaQuery";
-import { Messages, Groups } from "../..";
 import { inboxVariant } from "../../../utils/variants";
 
 const Inbox = ({ inbox, setShowSideBar }) => {
-  const forMobile = useForMobile()
+  const forMobile = useForMobile();
   const showInbox = useSelector((state) => state.chat.showInbox);
   const [search, setSearch] = useState(false);
   const [createGroup, setCreateGroup] = useState(false);
@@ -23,13 +23,14 @@ const Inbox = ({ inbox, setShowSideBar }) => {
           ? "m_hidden"
           : "hidden"
       }
-      className="inbox__container"
+      className="inbox"
     >
-      <div className="section-name">
+      <div className="inbox__section-name">
         {forMobile && (
           <img
             src="https://img.icons8.com/material/20/A9A9A9/menu--v1.png"
             alt="menu"
+            className="inbox__hamburger-menu"
             onClick={() => setShowSideBar(true)}
           />
         )}
@@ -37,16 +38,18 @@ const Inbox = ({ inbox, setShowSideBar }) => {
         <img
           src="https://img.icons8.com/small/10/000000/plus-math.png"
           alt="plus"
+          className="inbox__plus-icon"
           onClick={() =>
             inbox === "Messages" ? setSearch(!search) : setCreateGroup(true)
           }
         />
       </div>
-      {inbox === "Messages" ? (
-        <Messages search={search} setSearch={setSearch} />
-      ) : (
-        <Groups createGroup={createGroup} setCreateGroup={setCreateGroup} />
-      )}
+      {!search && <UnreadMessages inbox={inbox} />}
+      <Messages search={search} setSearch={setSearch} />
+      <CreateGroupCard
+        createGroup={createGroup}
+        setCreateGroup={setCreateGroup}
+      />
     </motion.div>
   );
 };
