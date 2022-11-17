@@ -1,6 +1,6 @@
 @use "../components/sidebar";
 @use "../components/statusbar";
-@use "../components/inbox";
+@use "../components/inbox/inbox";
 @use "../components/chatscreen";
 @use "../components/profile";
 @use "../abstracts/abstracts" as *;

@@ -1,5 +1,5 @@
-@use "../abstracts/abstracts" as *;
-@use "../mixins/media-query" as *;
+@use "../../../abstracts/abstracts" as *;
+@use "../../../mixins/media-query" as *;
 .groupchat-builder__container {
   position: absolute;
   width: 100vw;

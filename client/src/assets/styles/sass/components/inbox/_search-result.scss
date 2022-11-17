@@ -1,5 +1,5 @@
-@use "../abstracts/abstracts" as *;
-@use '../mixins/media-query' as*;
+@use "../../abstracts/abstracts" as *;
+@use "../../mixins/media-query" as *;
 .result {
   width: 100%;
   > img {
@@ -10,7 +10,7 @@
     text-align: center;
     color: red;
   }
-  .user__container {
+  .user{
     display: flex;
     align-items: center;
     margin: 0.7rem 0;
@@ -21,13 +21,13 @@
     &:hover {
       background-color: $slate-200;
     }
-    .user__profile {
+    &__profile {
       width: 2.3rem;
       height: 2.3rem;
       border-radius: 50%;
       background-color: rgb(72, 235, 208);
     }
-    .user__info {
+    &__info {
       margin-left: 0.7rem;
       .user__name {
         font-weight: 500;

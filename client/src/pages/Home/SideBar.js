@@ -1,8 +1,8 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { useForMobile } from "../../utils/mediaQuery";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useForMobile } from "../../utils/mediaQuery";
 import { setShowInbox, setUserProfile } from "../../redux/chatSlice";
 import { logout } from "../../redux/authSlice";
 import { showSideBarVariant } from "../../utils/variants";
@@ -11,37 +11,37 @@ import group from "../../assets/icons/user-group-solid.svg";
 
 const SideBar = ({ setInbox, showSideBar, setShowSideBar }) => {
   const forMobile = useForMobile();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const showInbox = useSelector((state) => state.chat.showInbox);
   const userInfo = useSelector((state) => state.auth.user.user);
-  console.log(showSideBar);
 
   return (
     <motion.div
-      className="side-bar"
+      className="sidebar"
       variants={showSideBarVariant}
       animate={!showSideBar && forMobile ? "hidden" : "visible"}
     >
-      <div className="side-bar__container">
-        <div className="logo__div">
+      <div className="sidebar__container">
+        <div className="app-name">
           <img
             src="https://img.icons8.com/emoji/45/000000/water-wave.png"
             alt="wave"
+            className="app-name__logo"
           />
-          <p>Wave</p>
+          <p className="app-name__title">Wave</p>
         </div>
-        <ul>
-          <li onClick={() => setInbox("Messages")}>
+        <ul className="sidebar__list">
+          <li className="sidebar__item" onClick={() => setInbox("Messages")}>
             <img src={message} alt="message" />
             <span>Messages</span>
           </li>
-          <li onClick={() => setInbox("Groups")}>
+          <li className="sidebar__item" onClick={() => setInbox("Groups")}>
             <img src={group} alt="group" />
             <span>Groups</span>
           </li>
         </ul>
-        <div className="setting">
+        <div className="sidebar__setting">
           <button
             onClick={() =>
               dispatch(setUserProfile({ show: true, info: userInfo }))

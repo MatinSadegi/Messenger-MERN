@@ -1,6 +1,6 @@
 @use "../abstracts/abstracts" as *;
 @use "../mixins/media-query" as *;
-.side-bar {
+.sidebar {
   position: relative;
   &__container {
     position: relative;
@@ -11,18 +11,18 @@
     @include for-mobile {
       width: 11rem;
     }
-    .logo__div {
+    .app-name {
       display: flex;
       align-items: center;
-      p {
+      &__title {
         font-family: $relway;
         font-size: 1.2rem;
         font-weight: 600;
       }
     }
-    ul {
+    .sidebar__list {
       margin: 2.5rem 0 0 10px;
-      li {
+      .sidebar__item {
         font-size: 0.8rem;
         display: flex;
         align-items: center;
@@ -58,7 +58,7 @@
         display: none;
       }
     }
-    .setting{
+    .sidebar__setting{
       display: none;
       width: 100%;
       position: absolute;
