@@ -10,11 +10,11 @@ const Auth = () => {
   };
   return (
     <div className="auth">
-      <div className="auth__form-container">
-        <div className="auth__form-container_fields">
-          <p>START FOR FREE</p>
-          <h2>{isSignup ? "Create new account" : "Sign In"}</h2>
-          <p>
+      <div className="auth__container">
+        <div className="auth__fields">
+          <p className="auth__title">START FOR FREE</p>
+          <h2 className="auth__type">{isSignup ? "Create new account" : "Sign In"}</h2>
+          <p className="auth__status">
             {isSignup
               ? "Already have an account ?"
               : " Don't have an account ?"}

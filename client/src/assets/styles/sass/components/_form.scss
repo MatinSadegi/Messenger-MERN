@@ -1,0 +1,58 @@
+@use "../abstracts/abstracts" as *;
+@use "../mixins/media-query" as *;
+%custom-input {
+  display: block;
+  border: none;
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 0.6rem;
+  color: white;
+  background-color: rgb(52, 52, 52);
+  outline: none;
+}
+form {
+  margin-top: 15px;
+  width: 60%;
+  @include for-mobile {
+    width: 100%;
+  }
+  label {
+    > input {
+      display: none;
+    }
+    @extend %custom-input;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    text-align: center;
+    width: 100%;
+  }
+  input {
+    @extend %custom-input;
+    &::placeholder {
+      color: $grey;
+      font-size: 0.7rem;
+    }
+  }
+  > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    input {
+      width: 45%;
+    }
+  }
+  button {
+    padding: 9px 0;
+    margin: auto;
+    margin-top: 20px;
+    display: block;
+    border: none;
+    width: 50%;
+    border-radius: 1rem;
+    background-color: $sky-500;
+    color: white;
+  }
+}

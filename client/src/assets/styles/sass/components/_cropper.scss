@@ -1,0 +1,76 @@
+@use '../abstracts/abstracts' as *;
+.cropper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__container {
+    position: absolute;
+
+    flex-direction: column;
+    height: 80vh;
+    width: 50vw;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0);
+    border-radius: 1rem;
+    .cropper__title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      height: 13%;
+    }
+    .cropper__img {
+      position: relative;
+      height: 70%;
+      width: 100%;
+    }
+    button {
+      border: none;
+      padding: 0.5rem 3rem;
+      background-color: $purple-700;
+      color: rgb(255, 255, 255);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      margin: auto;
+      > img {
+        margin-right: 0.2rem;
+      }
+    }
+  }
+  &__set-profile{
+    width: 15rem;
+    height: 15rem;
+    background-color: rgb(0, 0, 0);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    .cropper__close-set-profile{
+      display: flex;
+      align-self: end;
+    }
+    .cropper__avatar{
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+    button{
+      border: none;
+      padding: 0.5rem 3rem;
+      background-color: $sky-500;
+      color: rgb(255, 255, 255);
+      border-radius: 0.5rem;
+    }
+  }
+}

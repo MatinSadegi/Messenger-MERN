@@ -1,16 +1,8 @@
 @use "../abstracts/abstracts" as *;
 @use '../mixins/media-query' as *;
-%custom-input {
-  display: block;
-  border: none;
-  margin-top: 15px;
-  width: 100%;
-  padding: 10px;
-  border-radius: 0.6rem;
-  color: white;
-  background-color: rgb(52, 52, 52);
-  outline: none;
-}
+@use '../components/form';
+@use '../components/cropper';
+
 .auth {
   width: 100vw;
   height: 100vh;
@@ -20,7 +12,7 @@
   align-items: center;
   color: white;
 
-  .auth__form-container {
+  &__container {
     width: 65%;
     height: 85%;
     background: url(../../images/pnghut_communication-icon-chat-white.png);
@@ -39,7 +31,7 @@
       background-position: top;
       justify-content: center;
     }
-    .auth__form-container_fields {
+    .auth__fields {
       color: $grey;
       width: 60%;
       margin-left: 3rem;
@@ -51,66 +43,21 @@
         margin: 0;
         margin-top: 6rem;
       }
-      > p:first-child {
+      .auth__title{
         font-size: 0.9rem;
       }
-      h2 {
+      .auth__type {
         color: white;
         font-size: 1.7rem;
         letter-spacing: 0.1rem;
         margin: 8px 0;
       }
-      > p:nth-child(3) {
+      .auth__status {
         font-size: 0.8rem;
         span {
           margin-left: 2px;
           color: $sky-500;
           cursor: pointer;
-        }
-      }
-      form {
-        margin-top: 15px;
-        width: 60%;
-        @include for-mobile{
-          width: 100%;
-        }
-        label {
-          > input {
-            display: none;
-          }
-          @extend %custom-input;
-          font-size: 0.8rem;
-          font-weight: 500;
-          background-color: rgb(255, 255, 255);
-          color: black;
-          text-align: center;
-          width: 100%;
-        }
-        input {
-          @extend %custom-input;
-          &::placeholder {
-            color: $grey;
-            font-size: 0.7rem;
-          }
-        }
-        > div {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          input {
-            width: 45%;
-          }
-        }
-        button {
-          padding: 9px 0;
-          margin: auto;
-          margin-top: 20px;
-          display: block;
-          border: none;
-          width: 50%;
-          border-radius: 1rem;
-          background-color: $sky-500;
-          color: white;
         }
       }
     }

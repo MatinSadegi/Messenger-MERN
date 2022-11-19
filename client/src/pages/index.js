@@ -2,6 +2,7 @@
 export { default as Card } from "../components/Card";
 export { default as Profile } from "../components/Profile";
 export { default as Typing } from "../components/Typing";
+export { default as CropImage } from "../components/CropImage";
 //Auth
 export { default as Auth } from "./Auth/Auth";
 export { default as Signup } from "./Auth/Signup";

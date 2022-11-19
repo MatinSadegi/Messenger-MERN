@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSignUpMutation } from "../../services/authApiSlice";
 import { setProfile } from "../../redux/authSlice.js";
-
+import { CropImage } from "../index";
 const initialState = {
   firstName: "",
   lastName: "",
-  avatar: {},
+  avatar: null,
   email: "",
   password: "",
   confirmPassword: "",
@@ -17,8 +17,10 @@ const initialState = {
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [form, setForm] = useState(initialState);
   const [signUp] = useSignUpMutation();
+  const [form, setForm] = useState(initialState);
+  const [openCrop, setOpenCrop] = useState(false);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -38,68 +40,74 @@ const Signup = () => {
       });
     }
   };
-  //handle and convert it in base64
+  //choose image
   const handleImage = (e) => {
     const pics = e.target.files[0];
+    const picsURL = URL.createObjectURL(pics);
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      const data = new FileReader();
-      data.readAsDataURL(pics);
-      data.onloadend = () => {
-        setForm({ ...form, avatar: data.result });
-      };
+      setForm({ ...form, avatar: picsURL });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <div>
+    <>
+      <form onSubmit={handleSubmit} noValidate>
+        <div>
+          <input
+            name="firstName"
+            type="text"
+            placeholder="First Name"
+            onChange={handleChange}
+            required
+          />
+          <input
+            name="lastName"
+            type="text"
+            placeholder="Last Name"
+            onChange={handleChange}
+            required
+          />
+        </div>
         <input
-          name="firstName"
-          type="text"
-          placeholder="First Name"
+          name="email"
+          type="email"
+          placeholder="Email"
           onChange={handleChange}
           required
         />
         <input
-          name="lastName"
-          type="text"
-          placeholder="Last Name"
+          name="password"
+          type="password"
+          placeholder="Password"
           onChange={handleChange}
           required
         />
-      </div>
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="confirmPassword"
-        type="password"
-        placeholder="Confirm Password"
-        onChange={handleChange}
-        required
-      />
-      <label className="custom-file" onChange={handleImage}>
-        <input name="avatar" type="file" />
-        Upload Profile Image
-      </label>
-      <button
-        type="submit"
-        className="auth__form-container_fields-content_button"
-      >
-        Sign Up
-      </button>
-    </form>
+        <input
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm Password"
+          onChange={handleChange}
+          required
+        />
+        <label
+          className="custom-file"
+          onClick={() => setOpenCrop(true)}
+          onChange={handleImage}
+        >
+          <input name="avatar" type="file" />
+          Upload Profile Image
+        </label>
+        <button
+          type="submit"
+          className="auth__form-container_fields-content_button"
+        >
+          Sign Up
+        </button>
+      </form>
+      {!openCrop ? null : (
+        <CropImage form={form} setForm={setForm} setOpenCrop={setOpenCrop} />
+      )}
+    </>
   );
 };
 

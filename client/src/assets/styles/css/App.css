@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&family=Raleway:wght@200;400;600&display=swap");
-.auth .auth__form-container .auth__form-container_fields form input, .auth .auth__form-container .auth__form-container_fields form label {
+form input, form label {
   display: block;
   border: none;
   margin-top: 15px;
@@ -11,6 +11,125 @@
   outline: none;
 }
 
+form {
+  margin-top: 15px;
+  width: 60%;
+}
+@media only screen and (max-width: 510px) {
+  form {
+    width: 100%;
+  }
+}
+form label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  text-align: center;
+  width: 100%;
+}
+form label > input {
+  display: none;
+}
+form input::placeholder {
+  color: #e8e6e6;
+  font-size: 0.7rem;
+}
+form > div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+form > div input {
+  width: 45%;
+}
+form button {
+  padding: 9px 0;
+  margin: auto;
+  margin-top: 20px;
+  display: block;
+  border: none;
+  width: 50%;
+  border-radius: 1rem;
+  background-color: #3ca9ed;
+  color: white;
+}
+
+.cropper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cropper__container {
+  position: absolute;
+  flex-direction: column;
+  height: 80vh;
+  width: 50vw;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;
+}
+.cropper__container .cropper__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 13%;
+}
+.cropper__container .cropper__img {
+  position: relative;
+  height: 70%;
+  width: 100%;
+}
+.cropper__container button {
+  border: none;
+  padding: 0.5rem 3rem;
+  background-color: #7e22ce;
+  color: rgb(255, 255, 255);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+.cropper__container button > img {
+  margin-right: 0.2rem;
+}
+.cropper__set-profile {
+  width: 15rem;
+  height: 15rem;
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.cropper__set-profile .cropper__close-set-profile {
+  display: flex;
+  align-self: end;
+}
+.cropper__set-profile .cropper__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.cropper__set-profile button {
+  border: none;
+  padding: 0.5rem 3rem;
+  background-color: #3ca9ed;
+  color: rgb(255, 255, 255);
+  border-radius: 0.5rem;
+}
+
 .auth {
   width: 100vw;
   height: 100vh;
@@ -20,7 +139,7 @@
   align-items: center;
   color: white;
 }
-.auth .auth__form-container {
+.auth__container {
   width: 65%;
   height: 85%;
   background: url(../../images/pnghut_communication-icon-chat-white.png);
@@ -32,94 +151,51 @@
   align-items: center;
 }
 @media only screen and (max-width: 768px) {
-  .auth .auth__form-container {
+  .auth__container {
     width: 95%;
   }
 }
 @media only screen and (max-width: 510px) {
-  .auth .auth__form-container {
+  .auth__container {
     width: 100%;
     height: 95%;
     background-position: top;
     justify-content: center;
   }
 }
-.auth .auth__form-container .auth__form-container_fields {
+.auth__container .auth__fields {
   color: #e8e6e6;
   width: 60%;
   margin-left: 3rem;
 }
 @media only screen and (max-width: 768px) {
-  .auth .auth__form-container .auth__form-container_fields {
+  .auth__container .auth__fields {
     width: 70%;
   }
 }
 @media only screen and (max-width: 510px) {
-  .auth .auth__form-container .auth__form-container_fields {
+  .auth__container .auth__fields {
     width: 80%;
     margin: 0;
     margin-top: 6rem;
   }
 }
-.auth .auth__form-container .auth__form-container_fields > p:first-child {
+.auth__container .auth__fields .auth__title {
   font-size: 0.9rem;
 }
-.auth .auth__form-container .auth__form-container_fields h2 {
+.auth__container .auth__fields .auth__type {
   color: white;
   font-size: 1.7rem;
   letter-spacing: 0.1rem;
   margin: 8px 0;
 }
-.auth .auth__form-container .auth__form-container_fields > p:nth-child(3) {
+.auth__container .auth__fields .auth__status {
   font-size: 0.8rem;
 }
-.auth .auth__form-container .auth__form-container_fields > p:nth-child(3) span {
+.auth__container .auth__fields .auth__status span {
   margin-left: 2px;
   color: #3ca9ed;
   cursor: pointer;
-}
-.auth .auth__form-container .auth__form-container_fields form {
-  margin-top: 15px;
-  width: 60%;
-}
-@media only screen and (max-width: 510px) {
-  .auth .auth__form-container .auth__form-container_fields form {
-    width: 100%;
-  }
-}
-.auth .auth__form-container .auth__form-container_fields form label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  background-color: rgb(255, 255, 255);
-  color: black;
-  text-align: center;
-  width: 100%;
-}
-.auth .auth__form-container .auth__form-container_fields form label > input {
-  display: none;
-}
-.auth .auth__form-container .auth__form-container_fields form input::placeholder {
-  color: #e8e6e6;
-  font-size: 0.7rem;
-}
-.auth .auth__form-container .auth__form-container_fields form > div {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-.auth .auth__form-container .auth__form-container_fields form > div input {
-  width: 45%;
-}
-.auth .auth__form-container .auth__form-container_fields form button {
-  padding: 9px 0;
-  margin: auto;
-  margin-top: 20px;
-  display: block;
-  border: none;
-  width: 50%;
-  border-radius: 1rem;
-  background-color: #3ca9ed;
-  color: white;
 }
 
 .sidebar {
@@ -809,7 +885,6 @@
 .signed-user__profile .signed-user__info .signed-user__avatar {
   width: 5rem;
   height: 5rem;
-  object-fit: cover;
   border-radius: 50%;
   margin-bottom: 1rem;
   padding: 0;
