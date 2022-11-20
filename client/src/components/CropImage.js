@@ -7,6 +7,7 @@ const CropImage = ({ form, setForm, setOpenCrop }) => {
   const [croppedArea, setCroppedArea] = useState(null);
   const [zoom, setZoom] = useState(1);
   const [openSetProfile, setOpenSetProfile] = useState(false);
+  const [croppedImg, setCroppedImg] = useState(null);
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
@@ -18,13 +19,24 @@ const CropImage = ({ form, setForm, setOpenCrop }) => {
       const data = new FileReader();
       data.readAsDataURL(file);
       data.onloadend = () => {
-        setForm({ ...form, avatar: data.result });
+        setCroppedImg(data.result);
       };
       setOpenSetProfile(true);
     } catch (error) {
       console.log(error);
     }
   };
+ //set image on profile
+  const setImage = async () => {
+    try {
+      setForm({ ...form, avatar: croppedImg });
+      setOpenSetProfile(false);
+      setOpenCrop(false)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="cropper">
       <div
@@ -68,8 +80,8 @@ const CropImage = ({ form, setForm, setOpenCrop }) => {
               setOpenCrop(false);
             }}
           />
-          <img src={form.avatar} alt="avatar" className="cropper__avatar" />
-          <button>Set Profile</button>
+          <img src={croppedImg} alt="avatar" className="cropper__avatar" />
+          <button onClick={setImage}>Set Profile</button>
         </div>
       )}
     </div>
