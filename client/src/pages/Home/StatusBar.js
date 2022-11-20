@@ -14,12 +14,7 @@ const StatusBar = () => {
   return (
     <div className="status-bar__container">
       <div className="status-bar__top">
-        <img
-          src={`${userInfo.avatar.url}`}
-          className="profile-img"
-          onClick={() => setShowItems(!showItems)}
-          alt="avatar"
-        />
+       
 
         <motion.div
           className="items"
