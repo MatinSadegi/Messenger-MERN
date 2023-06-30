@@ -18,7 +18,7 @@ export { default as Sender } from "./Home/ChatScreen/Sender";
 export { default as Header } from "./Home/ChatScreen/Header";
 //Home->Inbox
 export { default as Inbox } from "./Home/Inbox/Inbox";
-export { default as UnreadMessages } from "./Home/Inbox/UnreadMessages";
+export { default as UserChats } from "./Home/Inbox/UserChats";
 //Home->Inbox->Messages
 export { default as Messages } from "./Home/Inbox/Messages/Messages";
 export { default as User } from "./Home/Inbox/Messages/User";
