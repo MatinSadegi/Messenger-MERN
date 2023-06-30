@@ -24,7 +24,7 @@ const Sender = ({ message }) => {
         }
       >
         <p>{content}<span>{sendTime}</span></p>
-        {message.chatId.isGroupChat && <img src={`${message.sender.avatar.url}`}/>}
+        {message.chatId.isGroupChat && <img src={`${message.sender.avatar.url}`} alt="avatar"/>}
       </div>
     </div>
   );

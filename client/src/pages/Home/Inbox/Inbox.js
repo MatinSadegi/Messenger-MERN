@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { Messages, CreateGroupCard, UnreadMessages } from "../..";
+import { UserChats, Messages, CreateGroupCard } from "../..";
 import { useForMobile } from "../../../utils/mediaQuery";
 import { inboxVariant } from "../../../utils/variants";
 
@@ -10,6 +10,7 @@ const Inbox = ({ inbox, setShowSideBar }) => {
   const showInbox = useSelector((state) => state.chat.showInbox);
   const [search, setSearch] = useState(false);
   const [createGroup, setCreateGroup] = useState(false);
+
   return (
     <motion.div
       variants={inboxVariant}
@@ -44,7 +45,7 @@ const Inbox = ({ inbox, setShowSideBar }) => {
           }
         />
       </div>
-      {!search && <UnreadMessages inbox={inbox} />}
+      {!search && <UserChats inbox={inbox} />}
       <Messages search={search} setSearch={setSearch} />
       <CreateGroupCard
         createGroup={createGroup}

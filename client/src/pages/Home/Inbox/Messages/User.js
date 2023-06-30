@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useCreateChatMutation } from "../../../../services/chatApiSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { setSelectedChat } from "../../../../redux/chatSlice";
 
 const User = ({
@@ -9,7 +9,8 @@ const User = ({
   setSearch,
   setCreateChatStatus,
 }) => {
-  const {firstName, lastName, userId, email} = user
+  const {firstName, lastName, _id, email} = user
+  const userId = _id
   const dispatch = useDispatch();
   const [createChat, { isLoading, isSuccess }] = useCreateChatMutation();
   const accessChat = async () => {
