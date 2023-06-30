@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { Card, User } from "../../../index";
+import { User } from "../../../index";
 import {
   useSearchUsersQuery,
-  useFetchAllChatsQuery,
 } from "../../../../services/chatApiSlice";
 import searchIcon from "../../../../assets/icons/1492.gif";
 
 const Messages = ({search,setSearch}) => {
   const [skip, setSkip] = useState(true);
   const [searchUser, setSearchUser] = useState("");
-  const { data, isLoading } = useFetchAllChatsQuery();
   const [createChatStatus, setCreateChatStatus] = useState({
     loading: false,
     success: false,
