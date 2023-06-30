@@ -3,18 +3,31 @@ import { createSlice, current } from "@reduxjs/toolkit";
 const messageSlice = createSlice({
   name: "chat",
   initialState: {
-    receivedMessages: [],
+    messages: [],
+    notifications: localStorage.getItem("notifications")
+      ? JSON.parse(localStorage.getItem("notifications"))
+      : [],
+    newMessage: "",
   },
   reducers: {
-    setReceivedMessages: (state, action) => {
-      if (!current(state.receivedMessages).includes(action.payload)) {
-        state.receivedMessages = [...state.receivedMessages, action.payload];
-        console.log(action.payload)
+    setMessages: (state, action) => {
+      state.messages = action.payload;
 
-      }
+    },
+
+    setNewMessage: (state, action) => {
+      state.newMessage = action.payload;
+    },
+    setNotifications: (state, action) => {
+      state.notifications = action.payload
+      localStorage.setItem(
+        "notifications",
+        JSON.stringify(state.notifications)
+      );
     },
   },
 });
 
-export const { setReceivedMessages } = messageSlice.actions;
+export const { setMessages, setNewMessage, setNotifications } =
+  messageSlice.actions;
 export default messageSlice.reducer;

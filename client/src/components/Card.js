@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedChat, setShowInbox } from "../redux/chatSlice";
 import moment from "moment";
+import { setNotifications } from "../redux/messageSlice";
 
 const Card = ({ chat }) => {
   const dispatch = useDispatch();
   const signedUser = useSelector((state) => state.auth.user.user);
-  const newMessages = useSelector((state) => state.message.receivedMessages);
-  const [notification, setNotification] = useState(0);
+  const newMessages = useSelector((state) => state.message.messages);
+  const notifications = useSelector((state) => state.message.notifications);
   const lastMessageTime = chat.latestMessage && chat.latestMessage.updatedAt;
+  const [currentChatNotifications, setCurrentChatNotifications] = useState([]);
+
   useEffect(() => {
-    newMessages.forEach((message) => {
-      if (message.chatId._id === chat._id) {
-        setNotification(notification + 1);
-      }
-    });
-  }, [newMessages]);
+    setCurrentChatNotifications(
+      notifications?.filter((message) => message?.chatId?._id === chat._id)
+    );
+  }, [notifications]);
 
   return (
     <div
@@ -23,7 +24,12 @@ const Card = ({ chat }) => {
       onClick={() => {
         dispatch(setSelectedChat(chat));
         dispatch(setShowInbox(false));
-        setNotification(0);
+        dispatch(
+          setNotifications(
+            notifications.filter((message) => message?.chatId?._id !== chat._id)
+          )
+        );
+        setCurrentChatNotifications([])
       }}
     >
       <div className="card__profile">
@@ -34,6 +40,7 @@ const Card = ({ chat }) => {
                 <img
                   src={`${user.avatar.url}`}
                   alt="user-profile"
+                  key={user._id}
                   className="card__profile-img"
                 />
               );
@@ -46,6 +53,7 @@ const Card = ({ chat }) => {
                 <img
                   src={`${user.avatar.url}`}
                   alt="user-profile"
+                  key={user._id}
                   className="card__profile-img"
                 />
               );
@@ -80,9 +88,11 @@ const Card = ({ chat }) => {
         </p>
         <p
           className="card__notification"
-          style={{ display: notification === 0 ? "none" : "flex" }}
+          style={{
+            display: currentChatNotifications.length == 0 ? "none" : "flex",
+          }}
         >
-          {notification}
+          {currentChatNotifications.length}
         </p>
       </div>
     </div>

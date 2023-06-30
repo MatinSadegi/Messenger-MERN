@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const chatSlice = createSlice({
   name: "chat",
   initialState: {
+    onlineUsers:[],
     selectedChat: null,
     createChatStatus: { loading: false, success: false },
     userProfile: { show: false, info: null },
@@ -22,6 +24,9 @@ const chatSlice = createSlice({
       state.showInbox = action.payload;
       
     },
+    setOnlineUsers:(state,action) => {
+     state.onlineUsers = action.payload;
+    }
  
   },
 });
@@ -31,5 +36,6 @@ export const {
   setCreateChatStatus,
   setUserProfile,
   setShowInbox,
+  setOnlineUsers,
 } = chatSlice.actions;
 export default chatSlice.reducer;
