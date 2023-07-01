@@ -35,14 +35,14 @@ export const signUp = async (req, res) => {
 //SignIn
 export const signIn = async (req, res) => {
   const { email } = req.body;
-  const existingUser = await User.findOne({ email });
+  const user = await User.findOne({ email });
   const error = validationResult(req);
   if (!error.isEmpty()) {
     return res.status(422).json({ errors: error.array()[0].msg });
   }
   res
     .status(200)
-    .json({ existingUser, token: generateToken(existingUser._id) });
+    .json({ user, token: generateToken(user._id) });
 };
 
 //GET All users

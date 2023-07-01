@@ -4,11 +4,12 @@ import User from '../models/user.js';
 //POST access or create chat
 export const accessChat = async (req, res) => {
   const { userId } = req.body;
+  console.log(!userId);
   let chatData;
   if (!userId) {
     res.status(400).json('UserId param not sent with request');
-  }
-
+  } 
+  console.log("first")
   let isChat = await Chat.find({
     isGroupChat: false,
     $and: [
@@ -20,9 +21,9 @@ export const accessChat = async (req, res) => {
   //   path: 'latestMessage.sender',
   //   select: 'firstName lastName email',
   // });
-  console.log(req.user._id , userId);
-  console.log(isChat)
-
+  // console.log(req.user._id , userId);
+  // console.log(isChat)
+ 
   if (isChat.length > 0) {
     res.send(isChat[0]);
   } else {
