@@ -7,16 +7,35 @@ import { setNotifications } from "../redux/messageSlice";
 const Card = ({ chat }) => {
   const dispatch = useDispatch();
   const signedUser = useSelector((state) => state.auth.user.user);
-  const newMessages = useSelector((state) => state.message.messages);
   const notifications = useSelector((state) => state.message.notifications);
+  const messages = useSelector((state) => state.message.messages);
   const lastMessageTime = chat.latestMessage && chat.latestMessage.updatedAt;
   const [currentChatNotifications, setCurrentChatNotifications] = useState([]);
-
+  const [cMessage, setCMessage] = useState([]);
+  const [lastMessage, setLastMessages] = useState(chat.latestMessage);
   useEffect(() => {
+
     setCurrentChatNotifications(
       notifications?.filter((message) => message?.chatId?._id === chat._id)
     );
-  }, [notifications]);
+  }, [notifications,chat]);
+
+  useEffect(() => {
+    setCMessage(
+      messages?.filter((message) => message?.chatId?._id === chat._id)
+    );
+  }, [messages, chat]);
+
+
+  useEffect(() => {
+    if (currentChatNotifications.length > 0) {
+      setLastMessages(
+        currentChatNotifications[currentChatNotifications.length - 1]
+      );
+    } else if (cMessage.length > 0) {
+      setLastMessages(cMessage[cMessage.length - 1]);
+    }
+  }, [currentChatNotifications, cMessage]);
 
   return (
     <div
@@ -29,7 +48,7 @@ const Card = ({ chat }) => {
             notifications.filter((message) => message?.chatId?._id !== chat._id)
           )
         );
-        setCurrentChatNotifications([])
+        setCurrentChatNotifications([]);
       }}
     >
       <div className="card__profile">
@@ -74,22 +93,22 @@ const Card = ({ chat }) => {
             </p>
           )}
           <p className="card__message-content">
-            {chat.latestMessage && chat.latestMessage.content.length > 40
-              ? `${chat.latestMessage.content.substring(0, 21)}"..."`
-              : chat.latestMessage && chat.latestMessage.content.length < 40
-              ? chat.latestMessage.content
+            {lastMessage && lastMessage.content.length > 40
+              ? `${lastMessage.content.substring(0, 21)}"..."`
+              : lastMessage && lastMessage.content.length < 40
+              ? lastMessage.content
               : "No message ..! "}
           </p>
         </div>
       </div>
       <div className="card__status">
         <p className="card__timestamp">
-          {moment(lastMessageTime).format("LT")}
+          {lastMessage ? moment(lastMessageTime).format("LT") : ''}
         </p>
         <p
           className="card__notification"
           style={{
-            display: currentChatNotifications.length == 0 ? "none" : "flex",
+            display: currentChatNotifications.length === 0 ? "none" : "flex",
           }}
         >
           {currentChatNotifications.length}

@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice} from "@reduxjs/toolkit";
 
 const messageSlice = createSlice({
   name: "chat",
@@ -8,6 +8,7 @@ const messageSlice = createSlice({
       ? JSON.parse(localStorage.getItem("notifications"))
       : [],
     newMessage: "",
+    lastMessage :""
   },
   reducers: {
     setMessages: (state, action) => {
@@ -25,9 +26,13 @@ const messageSlice = createSlice({
         JSON.stringify(state.notifications)
       );
     },
+    setLastMessage:(state,action) =>{
+      state.lastMessage = action.payload
+      
+    }
   },
 });
 
-export const { setMessages, setNewMessage, setNotifications } =
+export const { setMessages, setNewMessage, setNotifications,setLastMessage } =
   messageSlice.actions;
 export default messageSlice.reducer;

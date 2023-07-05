@@ -3,12 +3,14 @@ import { Card } from "../../index";
 import { useFetchAllChatsQuery } from "../../../services/chatApiSlice";
 
 const UserChats = ({ inbox }) => {
-  const { data, isLoading } = useFetchAllChatsQuery();
+  const { data, isLoading, isSuccess } = useFetchAllChatsQuery({
+    refetchOnMountOrArgChange: true,
+  });
   return (
     <div>
       <div className="unread-messages">
         {isLoading && <span className="unread-messages__loading-icon"></span>}
-        {data &&
+        {isSuccess &&
           data.length > 0 &&
           inbox === "Messages" &&
           data.map(

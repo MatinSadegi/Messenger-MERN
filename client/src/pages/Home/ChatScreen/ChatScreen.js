@@ -25,7 +25,7 @@ const ChatScreen = () => {
   const [skip, setSkip] = useState(true);
   const [isTyping, setIsTyping] = useState({ typing: false, name: "" });
   const [sendMessage] = useSendMessageMutation();
-  const { isFetching, currentData, isSuccess} = useFetchAllMessageQuery(
+  const { isFetching, currentData, isSuccess } = useFetchAllMessageQuery(
     currentChat && currentChat._id,
     {
       skip,
@@ -50,7 +50,7 @@ const ChatScreen = () => {
       socket.emit("setup", signedUser);
       socket.on("getOnlineUsers", (res) => dispatch(setOnlineUsers(res)));
     }
-  }, [socket]);
+  }, [signedUser,dispatch]);
 
   //when we join chat it function work and get chat data and all messages
   useEffect(() => {
@@ -61,7 +61,7 @@ const ChatScreen = () => {
         selectedChatCompare = currentChat;
       }
     }
-  }, [currentChat, isFetching]);
+  }, [currentChat, isFetching,dispatch,isSuccess,currentData]);
 
   //send message
   useEffect(() => {
@@ -72,15 +72,14 @@ const ChatScreen = () => {
   // receive message
   useEffect(() => {
     socket.on("get message", (res) => {
-      if (isSuccess) {
-        dispatch(setMessages([...messages, res]));
+      // console.log(selectedChatCompare._id, res.chatId._id);
+      if (!selectedChatCompare || selectedChatCompare._id !== res.chatId._id) {
+        dispatch(setNotifications([...notifications, res]));
       } else {
-        dispatch(
-          setNotifications([...notifications,res])
-        );
+        dispatch(setMessages([...messages, res]));
       }
     });
-  }, [socket, messages,notifications]);
+  }, [messages, notifications,dispatch]);
 
   const sendMessageHandler = async (e) => {
     if (e.key === "Enter" || e.target.alt === "send") {
