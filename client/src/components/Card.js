@@ -9,10 +9,10 @@ const Card = ({ chat }) => {
   const signedUser = useSelector((state) => state.auth.user.user);
   const notifications = useSelector((state) => state.message.notifications);
   const messages = useSelector((state) => state.message.messages);
-  const lastMessageTime = chat.latestMessage && chat.latestMessage.updatedAt;
   const [currentChatNotifications, setCurrentChatNotifications] = useState([]);
   const [cMessage, setCMessage] = useState([]);
   const [lastMessage, setLastMessages] = useState(chat.latestMessage);
+
   useEffect(() => {
 
     setCurrentChatNotifications(
@@ -103,7 +103,7 @@ const Card = ({ chat }) => {
       </div>
       <div className="card__status">
         <p className="card__timestamp">
-          {lastMessage ? moment(lastMessageTime).format("LT") : ''}
+          {lastMessage ? moment(lastMessage.updatedAt).format("LT") : ''}
         </p>
         <p
           className="card__notification"
