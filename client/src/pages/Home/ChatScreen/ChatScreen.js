@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Sender, Header, Typing } from "../../index";
+import { Sender, Header} from "../../index";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -15,15 +15,13 @@ import { setOnlineUsers } from "../../../redux/chatSlice";
 let socket, selectedChatCompare;
 const ChatScreen = () => {
   const dispatch = useDispatch();
-  const messages = useSelector((state) => state.message.messages);
-  const newMessage = useSelector((state) => state.message.newMessage);
-  const notifications = useSelector((state) => state.message.notifications);
+  const { messages, newMessage, notifications } = useSelector(
+    (state) => state.message
+  );
   const currentChat = useSelector((state) => state.chat.selectedChat);
   const signedUser = useSelector((state) => state.auth.user.user);
-  const [socketConnected, setSocketConnected] = useState(false);
   const [textMessage, setTextMessage] = useState("");
   const [skip, setSkip] = useState(true);
-  const [isTyping, setIsTyping] = useState({ typing: false, name: "" });
   const [sendMessage] = useSendMessageMutation();
   const { isFetching, currentData, isSuccess } = useFetchAllMessageQuery(
     currentChat && currentChat._id,
@@ -32,25 +30,20 @@ const ChatScreen = () => {
       refetchOnMountOrArgChange: true,
     }
   );
-  // useEffect(() => {
-  //   socket = io("http://localhost:5000");
-  //   socket.on("connected", () => setSocketConnected(true));
-  //   socket.emit("setup", signedUser);
-  //   socket.on("typing", (name) => setIsTyping({typing:true , name}));
-  //   socket.on("stop typing", () => setIsTyping({typing:false , name:""}));
-  // }, []);
 
   // when user sign in to the app
   useEffect(() => {
     socket = io("http://localhost:5000");
-  }, []);
+    return()=> {
+      socket.disconnect()
+    }
+  }, [signedUser]);
   //user connect to socket and add online users
   useEffect(() => {
-    if (socket) {
-      socket.emit("setup", signedUser);
-      socket.on("getOnlineUsers", (res) => dispatch(setOnlineUsers(res)));
-    }
-  }, [signedUser,dispatch]);
+    if (socket === null) return;
+    socket.emit("setup", signedUser);
+    socket.on("getOnlineUsers", (res) => dispatch(setOnlineUsers(res)));
+  }, [signedUser, dispatch]);
 
   //when we join chat it function work and get chat data and all messages
   useEffect(() => {
@@ -61,7 +54,7 @@ const ChatScreen = () => {
         selectedChatCompare = currentChat;
       }
     }
-  }, [currentChat, isFetching,dispatch,isSuccess,currentData]);
+  }, [currentChat, isFetching, dispatch, isSuccess, currentData]);
 
   //send message
   useEffect(() => {
@@ -79,7 +72,7 @@ const ChatScreen = () => {
         dispatch(setMessages([...messages, res]));
       }
     });
-  }, [messages, notifications,dispatch]);
+  }, [messages, notifications, dispatch]);
 
   const sendMessageHandler = async (e) => {
     if (e.key === "Enter" || e.target.alt === "send") {
@@ -107,17 +100,12 @@ const ChatScreen = () => {
         </div>
       ) : (
         <div className="chat-screen">
-          <Header currentChat={currentChat} signedUser={signedUser} />
+          <Header />
           <div className="chat-screen__main">
             {isFetching && (
               <div className="loader__container">
                 <span className="loader"></span>
               </div>
-            )}
-            {isTyping.typing ? (
-              <Typing currentChat={currentChat} name={isTyping.name} />
-            ) : (
-              ""
             )}
             {messages &&
               !isFetching &&

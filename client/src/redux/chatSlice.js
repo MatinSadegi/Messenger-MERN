@@ -27,7 +27,7 @@ const chatSlice = createSlice({
     setOnlineUsers:(state,action) => {
      state.onlineUsers = action.payload;
     }
- 
+
   },
 });
 

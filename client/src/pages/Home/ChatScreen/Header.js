@@ -1,9 +1,20 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setUserProfile,setShowInbox } from "../../../redux/chatSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserProfile, setShowInbox } from "../../../redux/chatSlice";
 
-const Header = ({ currentChat, signedUser }) => {
+const Header = () => {
   const dispatch = useDispatch();
+  const onlineUsers = useSelector((state) => state.chat.onlineUsers);
+  const currentChat = useSelector((state) => state.chat.selectedChat);
+  const signedUser = useSelector((state) => state.auth.user.user);
+  let receiver;
+  currentChat.users.forEach((user) => {
+    if (user._id !== signedUser._id) {
+      receiver = user;
+      
+    }
+  });
+
   return (
     <div className="chat-screen__header">
       <div className="chat-screen__left">
@@ -33,16 +44,12 @@ const Header = ({ currentChat, signedUser }) => {
           <p>
             {currentChat.isGroupChat
               ? currentChat.chatName
-              : currentChat.users.map((user) => {
-                  if (user._id !== signedUser._id) {
-                    return `${user.firstName} ${user.lastName}`;
-                  }
-                })}
+              : receiver && `${receiver.firstName} ${receiver.lastName}`}
           </p>
           <p>
             {currentChat.isGroupChat
-              ? `${currentChat.users.length} Members`
-              : "Online"}
+              ? `${currentChat.users.length} Members `
+              : onlineUsers?.some((user) => user?.userId === receiver?._id) ? "online" : ""}
           </p>
         </div>
       </div>
