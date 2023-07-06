@@ -9,6 +9,7 @@ import { Server } from "socket.io";
 import userRoutes from "./routes/users.js";
 import chatRoutes from "./routes/chat.js";
 import messageRoutes from "./routes/message.js";
+import { disconnect } from "process";
 
 const app = express();
 const server = createServer(app);
@@ -38,17 +39,21 @@ let onlineUsers = [];
 //Run when client connects
 io.on("connection", (socket) => {
   console.log("new WS connection..");
-  socket.on("setup", async (user) => {
-    !onlineUsers.some((item) => item.userId === user._id) &&
+  socket.on("setup", (userData) => {
+    !onlineUsers.some((item) => item.userId === userData._id) &&
       onlineUsers.push({
-        userId: user._id,
+        userId: userData._id,
         socketId: socket.id,
       });
-
     socket.emit("getOnlineUsers", onlineUsers);
-    socket.join(user._id);
+    socket.join(userData._id);
     socket.emit("connected");
   });
+
+  socket.on('disconnect',()=>{
+    onlineUsers = onlineUsers.filter(user => user.socketId !== socket.id)
+    socket.emit("getOnlineUsers", onlineUsers);
+  })
 
   socket.on("join chat", (room) => {
     socket.join(room);
@@ -64,8 +69,10 @@ io.on("connection", (socket) => {
     });
     
   });
-  socket.on("typing", (name) => socket.broadcast.emit("typing", name));
-  socket.on("stop typing", () => socket.broadcast.emit("stop typing"));
+  socket.off('setup',(userData)=>{
+    console.log("User Disconnected")
+    socket.leave(userData._id)
+  })
 });
 const PORT = process.env.PORT || 5000;
 server.listen(5000, console.log(`server is running on port ${PORT}`));
